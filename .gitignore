@@ -17,6 +17,10 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+.gitattributes
+gradlew
+gradlew.bat
+settings.gradle
 
 ### IntelliJ IDEA ###
 .idea
@@ -36,3 +40,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### yml ###
+application.yml
