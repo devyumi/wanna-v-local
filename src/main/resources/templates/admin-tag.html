@@ -696,7 +696,7 @@
           <!-- breacrumb -->
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a href="#" class="text-inherit">대시 보드</a></li>
+              <li class="breadcrumb-item"><a href="#" class="text-inherit">리뷰 관리</a></li>
               <li class="breadcrumb-item active" aria-current="page">리뷰 태그</li>
             </ol>
           </nav>
@@ -723,6 +723,8 @@
                 <div>
                     <button type="button" class="btn" style="background-color: #5AAB6F; color: white;"
                     data-bs-toggle="modal" data-bs-target="#categoryModal">카테고리 관리</button>
+                    <button type="button" class="btn ms-2" style="background-color: #5AAB6F; color: white;"
+                    data-bs-toggle="modal" data-bs-target="#addTagModal">태그 추가</button>
                 </div>
             </div>
 
@@ -759,14 +761,14 @@
 
                         <div class="modal-footer border-0">
                             <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
-                            data-bs-toggle="modal" data-bs-target="#addNewModal">추가</button>
+                            data-bs-toggle="modal" data-bs-target="#addCategoryModal">추가</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!--category modal-->
-            <div class="modal fade" id="addNewModal" aria-labelledby="addNewModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addCategoryModal" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -786,6 +788,32 @@
                         <div class="modal-footer border-0">
                             <button type="button" class="btn btn-outline-secondary me-3"
                     data-bs-toggle="modal" data-bs-target="#categoryModal">뒤로</button>
+                            <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
+                            data-bs-toggle="modal" data-bs-target="#addNewModal">추가 완료</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--add new tag modal-->
+            <div class="modal fade" id="addTagModal" aria-labelledby="addTagModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title">태그를 추가하세요.</h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body modal-dialog-scrollable d-flex align-items-center">
+                            <form>
+                                <div class="mb-3">
+                                  <label for="tagName" class="col-form-label">태그명</label>
+                                  <input type="text" class="form-control" id="tagName">
+                                </div>
+                              </form>
+                        </div>
+
+                        <div class="modal-footer border-0">
                             <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
                             data-bs-toggle="modal" data-bs-target="#addNewModal">추가 완료</button>
                         </div>
