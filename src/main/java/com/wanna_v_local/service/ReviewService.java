@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
@@ -21,5 +23,29 @@ public class ReviewService {
     @Transactional(readOnly = true)
     public Review findReview(Long reviewId) {
         return reviewRepository.findById(reviewId).orElseThrow(() -> new IllegalArgumentException("잘못된 id 값입니다."));
+    }
+
+    /**
+     * 리뷰 숨기기 (== 상태 false 업데이트)
+     *
+     * @param reviewId
+     */
+    @Transactional
+    public void updateReviewActiveFalse(Long reviewId, String note) {
+        Review review = findReview(reviewId);
+        reviewRepository.save(
+                Review.builder()
+                        .id(review.getId())
+                        .restaurant(review.getRestaurant())
+                        .user(review.getUser())
+                        .rating(review.getRating())
+                        .content(review.getContent())
+                        .image(review.getImage())
+                        .visitDate(review.getVisitDate())
+                        .createdAt(review.getCreatedAt())
+                        .updatedAt(LocalDateTime.now())
+                        .isActive(false)
+                        .note(note)
+                        .build());
     }
 }
