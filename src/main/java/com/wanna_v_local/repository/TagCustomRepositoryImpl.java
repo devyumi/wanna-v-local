@@ -9,6 +9,7 @@ import com.wanna_v_local.dto.request.TagRequestDTO;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class TagCustomRepositoryImpl implements TagCustomRepository {
@@ -27,11 +28,11 @@ public class TagCustomRepositoryImpl implements TagCustomRepository {
         processWhere(result, tagRequestDTO);
         return result
                 .groupBy(reviewTag.tag.id)
-                .fetchJoin().fetch();
+                .fetch();
     }
 
     @Override
-    public Integer count(TagRequestDTO tagRequestDTO) {
+    public List<Integer> count(TagRequestDTO tagRequestDTO) {
         //기본
         JPAQuery<Long> result = queryFactory.select(reviewTag.count())
                 .from(reviewTag)
@@ -41,10 +42,13 @@ public class TagCustomRepositoryImpl implements TagCustomRepository {
         processWhere(result, tagRequestDTO);
         return result
                 .groupBy(reviewTag.tag.id)
-                .fetchFirst().intValue();
+                .fetch()
+                .stream().map(Long::intValue)
+                .collect(Collectors.toList());
     }
 
     public void processWhere(JPAQuery<?> result, TagRequestDTO tagRequestDTO) {
+
         switch (tagRequestDTO.getType()) {
             //이용형태
             case "pattern" -> {

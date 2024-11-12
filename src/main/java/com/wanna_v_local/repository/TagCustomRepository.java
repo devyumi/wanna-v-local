@@ -12,5 +12,5 @@ public interface TagCustomRepository {
 
     List<ReviewTag> findAll(TagRequestDTO tagRequestDTO);
 
-    Integer count(TagRequestDTO tagRequestDTO);
+    List<Integer> count(TagRequestDTO tagRequestDTO);
 }
