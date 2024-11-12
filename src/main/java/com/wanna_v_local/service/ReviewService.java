@@ -48,4 +48,27 @@ public class ReviewService {
                         .note(note)
                         .build());
     }
+
+    /**
+     * 리뷰 보이기 (== 상태 true 업데이트)
+     *
+     * @param reviewId
+     */
+    public void updateReviewActiveTrue(Long reviewId) {
+        Review review = findReview(reviewId);
+        reviewRepository.save(
+                Review.builder()
+                        .id(review.getId())
+                        .restaurant(review.getRestaurant())
+                        .user(review.getUser())
+                        .rating(review.getRating())
+                        .content(review.getContent())
+                        .image(review.getImage())
+                        .visitDate(review.getVisitDate())
+                        .createdAt(review.getCreatedAt())
+                        .updatedAt(LocalDateTime.now())
+                        .isActive(true)
+                        .note(null)
+                        .build());
+    }
 }
