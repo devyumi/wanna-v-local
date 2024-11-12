@@ -18,6 +18,8 @@ public class ReviewResponseDTO {
     private Integer size;
     private String type;
     private String keyword;
+    private String score;
+    private String isActive;
     private Integer total;
     private Integer last;
     private Integer start;
@@ -30,6 +32,8 @@ public class ReviewResponseDTO {
         this.size = reviewRequestDto.getSize();
         this.type = reviewRequestDto.getType();
         this.keyword = reviewRequestDto.getKeyword();
+        this.score = reviewRequestDto.getScore();
+        this.isActive = reviewRequestDto.getIsActive();
         this.reviews = reviews;
         this.total = total;
         this.last = (int) Math.ceil(total / (double) size);

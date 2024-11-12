@@ -1,6 +1,8 @@
 package com.wanna_v_local.service;
 
 import com.wanna_v_local.domain.Review;
+import com.wanna_v_local.dto.request.ReviewRequestDTO;
+import com.wanna_v_local.dto.response.ReviewResponseDTO;
 import com.wanna_v_local.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,21 @@ import java.time.LocalDateTime;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+
+    /**
+     * 리뷰 전체 조회 (페이징 및 필터링 적용)
+     *
+     * @param reviewRequestDTO
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public ReviewResponseDTO findReviews(ReviewRequestDTO reviewRequestDTO) {
+        return ReviewResponseDTO.builder()
+                .reviewRequestDto(reviewRequestDTO)
+                .reviews(reviewRepository.findAll(reviewRequestDTO))
+                .total(reviewRepository.count(reviewRequestDTO))
+                .build();
+    }
 
     /**
      * 리뷰 상세 조회
