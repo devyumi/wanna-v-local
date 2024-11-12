@@ -683,204 +683,145 @@
                                             </div>
 
                                             </nav>
-    
+
 
 <!-- main -->
 <main class="main-content-wrapper">
   <div class="container">
-    <div class="row mb-8">
-      <div class="col-md-12">
-        <div>
-          <!-- page header -->
-          <h2>리뷰 관리</h2>
-          <!-- breacrumb -->
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a href="#" class="text-inherit">리뷰 관리</a></li>
-              <li class="breadcrumb-item active" aria-current="page">리뷰 태그</li>
-            </ol>
-          </nav>
+      <div class="row mb-8">
+          <div class="col-md-12">
+              <div>
+                  <!-- page header -->
+                  <h2>리뷰 관리</h2>
+                  <!-- breacrumb -->
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb mb-0">
+                          <li class="breadcrumb-item"><a href="#" class="text-inherit">리뷰 관리</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">리뷰 태그</li>
+                      </ol>
+                  </nav>
 
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xl-12 col-12 mb-5">
-        <div class="card h-100 card-lg">
-
-            <!--카테고리 목록 Start-->
-            <div class="p-6 d-flex">
-                <div class="me-auto">
-                    <select class="form-select">
-                    <option selected>맛/가격</option>
-                    <option>분위기</option>
-                    <option>서비스/기타</option>
-                    <option>이용 형태</option>
-                    </select>
-                </div>
-
-                <div>
-                    <button type="button" class="btn" style="background-color: #5AAB6F; color: white;"
-                    data-bs-toggle="modal" data-bs-target="#categoryModal">카테고리 관리</button>
-                    <button type="button" class="btn ms-2" style="background-color: #5AAB6F; color: white;"
-                    data-bs-toggle="modal" data-bs-target="#addTagModal">태그 추가</button>
-                </div>
-            </div>
-
-            <!--category modal-->
-            <div class="modal fade" id="categoryModal" aria-labelledby="categoryModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">카테고리 관리</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body modal-dialog-scrollable d-flex align-items-center">
-                            
-                            <!-- table -->
-                            <div class="table-responsive" style="width: 100%;">
-                                <table class="table table-centered table-hover text-nowrap text-center">
-                                <thead class="bg-light">
-                                    <th>카테고리명</th>
-                                    <th style="width: 0.5%;">비고</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>맛/가격</td>
-                    
-                                        <td>
-                                            <button type="button" class="btn btn-outline-secondary me-3">수정</button>
-                                            <button type="button" class="btn btn-outline-danger">삭제</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer border-0">
-                            <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
-                            data-bs-toggle="modal" data-bs-target="#addCategoryModal">추가</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--category modal-->
-            <div class="modal fade" id="addCategoryModal" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title">카테고리를 추가하세요.</h6>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body modal-dialog-scrollable d-flex align-items-center">
-                            <form>
-                                <div class="mb-3">
-                                  <label for="categoryName" class="col-form-label">카테고리명</label>
-                                  <input type="text" class="form-control" id="categoryName">
-                                </div>
-                              </form>
-                        </div>
-
-                        <div class="modal-footer border-0">
-                            <button type="button" class="btn btn-outline-secondary me-3"
-                    data-bs-toggle="modal" data-bs-target="#categoryModal">뒤로</button>
-                            <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
-                            data-bs-toggle="modal" data-bs-target="#addNewModal">추가 완료</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--add new tag modal-->
-            <div class="modal fade" id="addTagModal" aria-labelledby="addTagModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title">태그를 추가하세요.</h6>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body modal-dialog-scrollable d-flex align-items-center">
-                            <form>
-                                <div class="mb-3">
-                                  <label for="tagName" class="col-form-label">태그명</label>
-                                  <input type="text" class="form-control" id="tagName">
-                                </div>
-                              </form>
-                        </div>
-
-                        <div class="modal-footer border-0">
-                            <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
-                            data-bs-toggle="modal" data-bs-target="#addNewModal">추가 완료</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <!--카테고리 목록 End-->
-
-          <!-- card body -->
-          <div class="card-body p-0">
-            <!-- table -->
-            <div class="table-responsive">
-              <table class="table table-centered table-hover table-borderless mb-0 table-with-checkbox text-nowrap text-center">
-                <thead class="bg-light">
-                  <tr>
-                    <th>ID</th>
-                    <th>태그명</th>
-                    <th>사용 개수</th>
-                    <th style="width: 0.5%;">비고</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>
-                        <span class="text-truncate" style="display: inline-block; width: 30rem;">재료가 신선해요</span>
-                    </td>
-                    <td>236</td>
-
-                    <td>
-                        <button type="button" class="btn btn-outline-secondary me-3" style="border-radius: 5%;">수정</button>
-                        <button type="button" class="btn btn-outline-danger" style="border-radius: 5%;">삭제</button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>2</td>
-                    <td>
-                        <span class="text-truncate" style="display: inline-block; width: 30rem;">가성비가 좋아요</span>
-                    </td>
-                    <td>221</td>
-
-                    <td>
-                        <button type="button" class="btn btn-outline-secondary me-3" style="border-radius: 5%;">수정</button>
-                        <button type="button" class="btn btn-outline-danger" style="border-radius: 5%;">삭제</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="border-top d-md-flex justify-content-between align-items-center p-6">
-              <span>Showing 1 to 8 of 12 entries</span>
-              <nav class="mt-2 mt-md-0">
-                <ul class="pagination mb-0 ">
-                  <li class="page-item disabled"><a class="page-link " href="#!">Previous</a></li>
-                  <li class="page-item"><a class="page-link active" href="#!">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">Next</a></li>
-                </ul>
-              </nav>
-            </div>
+              </div>
           </div>
-        </div>
-    </div>
-  </div>
+      </div>
+
+      <div class="row">
+          <div class="col-xl-12 col-12 mb-5">
+              <div class="card h-100 card-lg">
+
+                  <!--카테고리 목록 Start-->
+                  <div class="p-6 d-flex">
+                      <div class="me-auto">
+                          <select class="form-select">
+                              <option selected>맛/가격</option>
+                              <option>분위기</option>
+                              <option>서비스/기타</option>
+                              <option>이용 형태</option>
+                          </select>
+                      </div>
+
+                      <div>
+                          <button type="button" class="btn ms-2" style="background-color: #5AAB6F; color: white;"
+                                  data-bs-toggle="modal" data-bs-target="#addTagModal">태그 추가</button>
+                      </div>
+                  </div>
+
+                  <!--add new tag modal-->
+                  <div class="modal fade" id="addTagModal" aria-labelledby="addTagModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h6 class="modal-title">태그를 추가하세요.</h6>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+
+                              <div class="modal-body modal-dialog-scrollable d-flex align-items-center">
+                                  <form>
+                                      <div class="me-auto">
+                                          <label for="category" class="col-form-label">카테고리</label>
+                                          <select class="form-select" id="category">
+                                              <option selected>맛/가격</option>
+                                              <option>분위기</option>
+                                              <option>서비스/기타</option>
+                                              <option>이용 형태</option>
+                                          </select>
+                                      </div>
+
+                                      <div class="mb-3">
+                                          <label for="tagName" class="col-form-label">태그명</label>
+                                          <input type="text" class="form-control" id="tagName">
+                                      </div>
+                                  </form>
+                              </div>
+
+                              <div class="modal-footer border-0">
+                                  <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
+                                          data-bs-toggle="modal" data-bs-target="#addNewModal">추가 완료</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!--카테고리 목록 End-->
+
+                  <!-- card body -->
+                  <div class="card-body p-0">
+                      <!-- table -->
+                      <div class="table-responsive">
+                          <table class="table table-centered table-hover table-borderless mb-0 table-with-checkbox text-nowrap text-center">
+                              <thead class="bg-light">
+                              <tr>
+                                  <th>ID</th>
+                                  <th>태그명</th>
+                                  <th>사용 개수</th>
+                                  <th style="width: 0.5%;">비고</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td>1</td>
+                                  <td>
+                                      <span class="text-truncate" style="display: inline-block; width: 30rem;">재료가 신선해요</span>
+                                  </td>
+                                  <td>236</td>
+
+                                  <td>
+                                      <button type="button" class="btn btn-outline-secondary me-3" style="border-radius: 5%;">수정</button>
+                                      <button type="button" class="btn btn-outline-danger" style="border-radius: 5%;">삭제</button>
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td>2</td>
+                                  <td>
+                                      <span class="text-truncate" style="display: inline-block; width: 30rem;">가성비가 좋아요</span>
+                                  </td>
+                                  <td>221</td>
+
+                                  <td>
+                                      <button type="button" class="btn btn-outline-secondary me-3" style="border-radius: 5%;">수정</button>
+                                      <button type="button" class="btn btn-outline-danger" style="border-radius: 5%;">삭제</button>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div>
+
+                      <div class="border-top d-md-flex justify-content-between align-items-center p-6">
+                          <span>Showing 1 to 8 of 12 entries</span>
+                          <nav class="mt-2 mt-md-0">
+                              <ul class="pagination mb-0 ">
+                                  <li class="page-item disabled"><a class="page-link " href="#!">Previous</a></li>
+                                  <li class="page-item"><a class="page-link active" href="#!">1</a></li>
+                                  <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                                  <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                                  <li class="page-item"><a class="page-link" href="#!">Next</a></li>
+                              </ul>
+                          </nav>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 </main>
 
   <!-- Libs JS -->
