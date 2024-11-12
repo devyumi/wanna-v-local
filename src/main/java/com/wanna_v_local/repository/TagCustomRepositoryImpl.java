@@ -48,7 +48,6 @@ public class TagCustomRepositoryImpl implements TagCustomRepository {
     }
 
     public void processWhere(JPAQuery<?> result, TagRequestDTO tagRequestDTO) {
-
         switch (tagRequestDTO.getType()) {
             //이용형태
             case "pattern" -> {

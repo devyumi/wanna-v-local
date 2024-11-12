@@ -6,17 +6,20 @@ import com.wanna_v_local.dto.request.TagRequestDTO;
 import com.wanna_v_local.dto.response.TagResponseDTO;
 import com.wanna_v_local.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TagService {
 
     private final TagRepository tagRepository;
 
     /**
      * 태그 전체 조회 (개수 포함)
+     *
      * @param tagRequestDTO
      * @return
      */
@@ -27,6 +30,17 @@ public class TagService {
                 .tags(tagRepository.findAll(tagRequestDTO))
                 .count(tagRepository.count(tagRequestDTO))
                 .build();
+    }
+
+    /**
+     * 태그 상세 조회
+     *
+     * @param tagId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Tag findTag(Long tagId) {
+        return tagRepository.findById(tagId).orElseThrow(() -> new IllegalArgumentException("잘못된 id 값입니다."));
     }
 
     /**
@@ -42,5 +56,28 @@ public class TagService {
                 .build());
     }
 
+    /**
+     * 태그 업데이트
+     * @param tagId
+     * @param tagSaveDTO
+     */
+    @Transactional
+    public void updateTag(Long tagId, TagSaveDTO tagSaveDTO) {
+        Tag tag = findTag(tagId);
+        tagRepository.save(Tag.builder()
+                .id(tagId)
+                .category(tagSaveDTO.getCategory())
+                .name(tagSaveDTO.getName())
+                .build());
+    }
 
+    /**
+     * 태그 삭제
+     *
+     * @param tagId
+     */
+    @Transactional
+    public void deleteTag(Long tagId) {
+        tagRepository.deleteById(tagId);
+    }
 }
