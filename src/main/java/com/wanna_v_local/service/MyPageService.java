@@ -2,14 +2,17 @@ package com.wanna_v_local.service;
 
 import com.wanna_v_local.domain.User;
 import com.wanna_v_local.dto.MyPageUpdateDTO;
+import com.wanna_v_local.dto.response.MyLikesResponseDTO;
 import com.wanna_v_local.dto.response.MyPageResponseDTO;
 import com.wanna_v_local.repository.UserRepository;
+import com.wanna_v_local.repository.mypage.query.MyLikesDTORepository;
 import com.wanna_v_local.repository.mypage.query.MyPageDTORepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,9 +20,11 @@ public class MyPageService {
 
     private final UserRepository userRepository;
     private final MyPageDTORepository myPageDTORepository;
+    private final MyLikesDTORepository myLikesDTORepository;
 
     /**
      * 마이페이지 메인 조회
+     *
      * @param userId
      * @return
      */
@@ -30,6 +35,7 @@ public class MyPageService {
 
     /**
      * 마이페이지 수정
+     *
      * @param userId
      * @param myPageUpdateDTO
      */
@@ -56,5 +62,15 @@ public class MyPageService {
                 .updatedAt(LocalDateTime.now())
                 .unregisteredAt(user.getUnregisteredAt())
                 .build());
+    }
+
+    /**
+     * 마이페이지 찜 목록 조회
+     * @param userId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<MyLikesResponseDTO> findMyLikes(Long userId) {
+        return myLikesDTORepository.findMyLikesById(userId);
     }
 }
