@@ -1,4 +1,4 @@
-package com.wanna_v_local.repository;
+package com.wanna_v_local.repository.impl;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -6,6 +6,7 @@ import com.wanna_v_local.domain.QReviewTag;
 import com.wanna_v_local.domain.QTag;
 import com.wanna_v_local.domain.ReviewTag;
 import com.wanna_v_local.dto.request.TagRequestDTO;
+import com.wanna_v_local.repository.TagCustomRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
