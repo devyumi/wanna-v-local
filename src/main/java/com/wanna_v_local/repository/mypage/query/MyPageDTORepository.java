@@ -20,7 +20,8 @@ public class MyPageDTORepository {
     private final QUserGradeLog userGradeLog = QUserGradeLog.userGradeLog;
 
     public MyPageResponseDTO findMyPageById(Long userId) {
-        return queryFactory.select(Projections.fields(MyPageResponseDTO.class,
+        return queryFactory
+                .select(Projections.fields(MyPageResponseDTO.class,
                         user.username, user.point, userGradeLog.grade,
                         QReview.review.id.countDistinct().intValue().as("reviewCount"),
                         QUserCoupon.userCoupon.id.countDistinct().intValue().as("couponCount")))

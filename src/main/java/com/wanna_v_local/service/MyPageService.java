@@ -1,5 +1,6 @@
 package com.wanna_v_local.service;
 
+import com.wanna_v_local.domain.Address;
 import com.wanna_v_local.domain.User;
 import com.wanna_v_local.dto.MyPageUpdateDTO;
 import com.wanna_v_local.dto.response.MyLikesResponseDTO;
@@ -50,10 +51,7 @@ public class MyPageService {
                 .email(user.getEmail())
                 .name(myPageUpdateDTO.getName())
                 .phone(user.getPhone())
-                .zipCode(myPageUpdateDTO.getZipCode())
-                .roadAddress(myPageUpdateDTO.getRoadAddress())
-                .landLotAddress(myPageUpdateDTO.getLandLotAddress())
-                .detailAddress(myPageUpdateDTO.getDetailAddress())
+                .address(new Address(myPageUpdateDTO.getZipCode(), myPageUpdateDTO.getRoadAddress(), myPageUpdateDTO.getLandLotAddress(), myPageUpdateDTO.getDetailAddress()))
                 .referralCode(user.getReferralCode())
                 .point(user.getPoint())
                 .consent(user.getConsent())
@@ -66,6 +64,7 @@ public class MyPageService {
 
     /**
      * 마이페이지 찜 목록 조회
+     *
      * @param userId
      * @return
      */
