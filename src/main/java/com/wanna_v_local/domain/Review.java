@@ -32,9 +32,16 @@ public class Review {
     private Integer rating;
     private String content;
     private String image;
+
+    @Temporal(TemporalType.DATE)
     private LocalDate visitDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime updatedAt;
+
     private Boolean isActive;
     private String note;
 }
