@@ -2,7 +2,7 @@ package com.wanna_v_local.service;
 
 import com.wanna_v_local.domain.Address;
 import com.wanna_v_local.domain.User;
-import com.wanna_v_local.dto.MyPageUpdateDTO;
+import com.wanna_v_local.dto.request.MyPageUpdateDTO;
 import com.wanna_v_local.dto.response.MyLikesResponseDTO;
 import com.wanna_v_local.dto.response.MyPageResponseDTO;
 import com.wanna_v_local.repository.UserRepository;
@@ -52,10 +52,10 @@ public class MyPageService {
                 .name(myPageUpdateDTO.getName())
                 .phone(user.getPhone())
                 .address(new Address(myPageUpdateDTO.getZipCode(), myPageUpdateDTO.getRoadAddress(), myPageUpdateDTO.getLandLotAddress(), myPageUpdateDTO.getDetailAddress()))
-                .referralCode(user.getReferralCode())
+                .code(user.getCode())
                 .point(user.getPoint())
                 .consent(user.getConsent())
-                .isUnregistered(user.getIsUnregistered())
+                .unregistered(user.getUnregistered())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .unregisteredAt(user.getUnregisteredAt())

@@ -1,7 +1,7 @@
 package com.wanna_v_local.service;
 
 import com.wanna_v_local.domain.Tag;
-import com.wanna_v_local.dto.TagSaveDTO;
+import com.wanna_v_local.dto.request.TagSaveDTO;
 import com.wanna_v_local.dto.request.TagRequestDTO;
 import com.wanna_v_local.dto.response.TagResponseDTO;
 import com.wanna_v_local.repository.TagRepository;
