@@ -1,4 +1,4 @@
-package com.wanna_v_local.dto;
+package com.wanna_v_local.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
