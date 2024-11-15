@@ -1,5 +1,6 @@
 package com.wanna_v_local.service;
 
+import com.wanna_v_local.domain.Restaurant;
 import com.wanna_v_local.dto.request.OCRRequestDTO;
 import com.wanna_v_local.dto.response.OCRResponseDTO;
 import com.wanna_v_local.repository.RestaurantRepository;
@@ -10,6 +11,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +46,26 @@ public class OCRService {
         HttpEntity<OCRRequestDTO> body = new HttpEntity<>(ocrRequest, headers);
 
         return restTemplate.postForObject(url, body, OCRResponseDTO.class);
+    }
+
+    /**
+     * 영수증 정보에서 가져온 식당명을 기반으로 하여 DB에 저장된 식당 조회
+     *
+     * @param name
+     * @return
+     */
+    public Restaurant findCorrectRestaurant(String name) {
+        //괄호 앞, 괄호 내 단어 추출
+        Pattern pattern = Pattern.compile("^(\\S+)\\s*(?:\\(([^)]+)\\))?$");
+        Matcher matcher = pattern.matcher(name);
+
+        if (matcher.find()) {
+            if (matcher.group(2) != null) {
+                return restaurantRepository.findByNameContainingAndNameContaining(matcher.group(1), matcher.group(2));
+            } else {
+                return restaurantRepository.findByNameContaining(name);
+            }
+        }
+        return null;
     }
 }
