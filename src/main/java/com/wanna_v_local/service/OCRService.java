@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,6 +66,21 @@ public class OCRService {
             } else {
                 return restaurantRepository.findByNameContaining(name);
             }
+        }
+        return null;
+    }
+
+    /**
+     * 영수증 정보에서 가져온 방문일자 타입 변환
+     * @param visitDate
+     * @return
+     */
+    public LocalDate findCorrectVisitDate(String visitDate) {
+        Pattern pattern = Pattern.compile("^(\\d{4})[-./](\\d{1,2})[-./](\\d{1,2})$");
+        Matcher matcher = pattern.matcher(visitDate);
+
+        if (matcher.find()) {
+            return LocalDate.of(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
         }
         return null;
     }
