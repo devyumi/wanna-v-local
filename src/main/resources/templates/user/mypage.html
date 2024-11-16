@@ -13,9 +13,9 @@
     <!--프로필-->
     <section class="mt-4">
         <div class="container" style="width: 97%;">
-            <div class="px-3">
+            <div class="px-2">
                 <div class="d-flex align-items-center">
-                    <img th:src="${my.profile}" alt="" class="avatar rounded-circle">
+                    <img th:src="${my.profile}" style="border-radius: 50%; width: 30%" alt="">
                     <div class="ms-4">
                        <h6 class="fw-bold my-3 ms-2" th:text="${my.username + '님 반갑습니다!'}"></h6>
                        <h6 class="fw-bold my-3 ms-2" style="font-size: 85%; color: #5AAB6F;" th:text="${my.grade + ' 등급'}"></h6>
