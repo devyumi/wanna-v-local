@@ -1,9 +1,12 @@
 package com.wanna_v_local.service;
 
+import com.wanna_v_local.domain.Reservation;
 import com.wanna_v_local.domain.User;
 import com.wanna_v_local.dto.request.MyPageUpdateDTO;
+import com.wanna_v_local.dto.request.MyReservationRequestDTO;
 import com.wanna_v_local.dto.response.MyLikesResponseDTO;
 import com.wanna_v_local.dto.response.MyPageResponseDTO;
+import com.wanna_v_local.repository.ReservationRepository;
 import com.wanna_v_local.repository.UserRepository;
 import com.wanna_v_local.repository.mypage.query.MyLikesDTORepository;
 import com.wanna_v_local.repository.mypage.query.MyPageDTORepository;
@@ -21,6 +24,7 @@ public class MyPageService {
     private final UserRepository userRepository;
     private final MyPageDTORepository myPageDTORepository;
     private final MyLikesDTORepository myLikesDTORepository;
+    private final ReservationRepository reservationRepository;
 
     /**
      * 마이페이지 메인 조회
@@ -81,5 +85,27 @@ public class MyPageService {
     @Transactional(readOnly = true)
     public List<MyLikesResponseDTO> findMyLikes(Long userId) {
         return myLikesDTORepository.findMyLikesById(userId);
+    }
+
+    /**
+     * 마이페이지 예약 현황 목록 조회
+     *
+     * @param userId
+     * @param myReservationRequestDTO
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<Reservation> findMyReservations(Long userId, MyReservationRequestDTO myReservationRequestDTO) {
+        return reservationRepository.findAllById(userId, myReservationRequestDTO);
+    }
+
+    /**
+     * 마이페이지 예약 상세 조회
+     * @param userId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Reservation findMyReservation(Long userId) {
+        return reservationRepository.findById(userId).get();
     }
 }

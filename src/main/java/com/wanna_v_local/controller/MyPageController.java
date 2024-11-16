@@ -1,6 +1,7 @@
 package com.wanna_v_local.controller;
 
 import com.wanna_v_local.dto.request.MyPageUpdateDTO;
+import com.wanna_v_local.dto.request.MyReservationRequestDTO;
 import com.wanna_v_local.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -44,6 +46,22 @@ public class MyPageController {
         myPageService.updateMyPage(1L, myPageUpdateDTO);
         log.info("마이페이지 수정 완료");
         return "redirect:/my";
+    }
+
+    @GetMapping("reservations")
+    public String getMyReservations(MyReservationRequestDTO myReservationRequestDTO, Model model) {
+        model.addAttribute("myReservation", myPageService.findMyReservations(1L, myReservationRequestDTO));
+        return "user/my-reservation";
+    }
+
+    @PostMapping("reservations/{id}")
+    public String getMyReservationsDetails(@PathVariable Long id, Model model) {
+        if (id == null) {
+            log.info("예약 정보를 찾을 수 없습니다.");
+            return "redirect:/reservations";
+        }
+        model.addAttribute("myReservation", myPageService.findMyReservation(id));
+        return "user/my-reservation-details";
     }
 
     private static void printErrorLog(BindingResult result) {
