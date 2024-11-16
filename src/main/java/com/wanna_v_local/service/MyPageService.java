@@ -1,6 +1,5 @@
 package com.wanna_v_local.service;
 
-import com.wanna_v_local.domain.Address;
 import com.wanna_v_local.domain.User;
 import com.wanna_v_local.dto.request.MyPageUpdateDTO;
 import com.wanna_v_local.dto.response.MyLikesResponseDTO;
@@ -35,6 +34,17 @@ public class MyPageService {
     }
 
     /**
+     * 마이페이지 수정 폼 - 사용자 정보 조회
+     *
+     * @param userId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public User findUserInfo(Long userId) {
+        return userRepository.findById(userId).get();
+    }
+
+    /**
      * 마이페이지 수정
      *
      * @param userId
@@ -46,12 +56,12 @@ public class MyPageService {
 
         userRepository.save(User.builder()
                 .id(user.getId())
-                .username(user.getUsername())
+                .username(myPageUpdateDTO.getUsername())
                 .profile(user.getProfile())
                 .email(user.getEmail())
                 .name(myPageUpdateDTO.getName())
                 .phone(user.getPhone())
-                .address(new Address(myPageUpdateDTO.getZipCode(), myPageUpdateDTO.getRoadAddress(), myPageUpdateDTO.getLandLotAddress(), myPageUpdateDTO.getDetailAddress()))
+                .address(myPageUpdateDTO.getAddress())
                 .code(user.getCode())
                 .point(user.getPoint())
                 .consent(user.getConsent())
