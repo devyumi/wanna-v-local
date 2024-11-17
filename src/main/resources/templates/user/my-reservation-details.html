@@ -39,8 +39,9 @@
           <td class="fw-bold text-end" th:text="${myReservation.guest} + '명'"></td>
         </tr>
       </table>
-
-      <a class="btn btn-success w-100 mt-2 mb-3">리&nbsp;뷰&nbsp;쓰&nbsp;기</a>
+      <form th:method="post" th:action="@{/uploads}">
+        <button type="submit" class="btn btn-success w-100 mt-2 mb-3">리&nbsp;뷰&nbsp;쓰&nbsp;기</button>
+      </form>
     </div>
   </section>
 

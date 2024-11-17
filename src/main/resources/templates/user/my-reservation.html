@@ -41,7 +41,9 @@
                         <h6 class="fw-bold mt-3" th:text="${#numbers.formatInteger(reservation.guest * 10000, 0, 'COMMA')} + '원'"></h6>
                     </div>
 
-                    <a class="btn btn-success w-100 mb-3">리&nbsp;뷰&nbsp;쓰&nbsp;기</a>
+                    <form th:method="post" th:action="@{/uploads}">
+                        <button type="submit" class="btn btn-success w-100 mb-3">리&nbsp;뷰&nbsp;쓰&nbsp;기</button>
+                    </form>
                 </div>
             </div>
         </div>
