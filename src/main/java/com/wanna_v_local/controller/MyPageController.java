@@ -64,6 +64,12 @@ public class MyPageController {
         return "user/my-reservation-details";
     }
 
+    @GetMapping("likes")
+    public String getMyLikes(Model model) {
+        model.addAttribute("myLikes", myPageService.findMyLikes(1L));
+        return "user/my-likes";
+    }
+
     private static void printErrorLog(BindingResult result) {
         log.info("{}", "*".repeat(20));
         for (FieldError fieldError : result.getFieldErrors()) {
