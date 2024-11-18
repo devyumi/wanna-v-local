@@ -5,10 +5,7 @@ import com.wanna_v_local.dto.request.MyPageUpdateDTO;
 import com.wanna_v_local.dto.request.MyReservationRequestDTO;
 import com.wanna_v_local.dto.response.MyLikesResponseDTO;
 import com.wanna_v_local.dto.response.MyPageResponseDTO;
-import com.wanna_v_local.repository.PaymentRepository;
-import com.wanna_v_local.repository.PointLogRepository;
-import com.wanna_v_local.repository.ReservationRepository;
-import com.wanna_v_local.repository.UserRepository;
+import com.wanna_v_local.repository.*;
 import com.wanna_v_local.repository.mypage.query.MyLikesDTORepository;
 import com.wanna_v_local.repository.mypage.query.MyPageDTORepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +25,7 @@ public class MyPageService {
     private final ReservationRepository reservationRepository;
     private final PaymentRepository paymentRepository;
     private final PointLogRepository pointLogRepository;
+    private final UserCouponRepository userCouponRepository;
 
     /**
      * 마이페이지 메인 조회
@@ -140,5 +138,15 @@ public class MyPageService {
     @Transactional(readOnly = true)
     public List<PointLog> findMyPoints(Long userId) {
         return pointLogRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
+    }
+
+    /**
+     * 마이페이지 쿠폰 내역 조회
+     * @param userId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<UserCoupon> findMyCoupons(Long userId) {
+        return userCouponRepository.findAllByUserIdAndEndDate(userId);
     }
 }

@@ -93,6 +93,12 @@ public class MyPageController {
         return "user/my-point";
     }
 
+    @GetMapping("coupons")
+    public String getMyCoupons(Model model) {
+        model.addAttribute("myCoupons", myPageService.findMyCoupons(1L));
+        return "user/my-coupon";
+    }
+
     private static void printErrorLog(BindingResult result) {
         log.info("{}", "*".repeat(20));
         for (FieldError fieldError : result.getFieldErrors()) {
