@@ -13,36 +13,40 @@
     <!--프로필-->
     <section class="mt-4">
         <div class="container" style="width: 97%;">
-            <div class="px-2">
-                <div class="d-flex align-items-center">
-                    <img th:src="${my.profile}" style="border-radius: 50%; width: 30%" alt="">
-                    <div class="ms-4">
-                       <h6 class="fw-bold my-3 ms-2" th:text="${my.username + '님 반갑습니다!'}"></h6>
-                       <h6 class="fw-bold my-3 ms-2" style="font-size: 85%; color: #5AAB6F;" th:text="${my.grade + ' 등급'}"></h6>
-                    </div>
-                    <a th:href="@{/my/edit}" class="mb-0 ms-auto text-decoration-none text-dark">></a>
+            <div class="d-flex align-items-center">
+                <img th:src="${my.profile}" style="border-radius: 50%; width: 30%" alt="">
+                <div class="ms-2">
+                   <h6 class="fw-bold my-3 ms-1" th:text="${my.username + '님 반갑습니다!'}"></h6>
+                   <h6 class="fw-bold my-3 ms-1" style="font-size: 85%; color: #5AAB6F;" th:text="${my.grade + ' 등급'}"></h6>
                 </div>
+                <a th:href="@{/my/edit}" class="mb-0 ms-auto text-decoration-none text-dark">></a>
             </div>
         </div>
     </section>
   
     <!--리뷰, 리워드, 쿠폰-->
     <section class="mt-3">
-        <div class="container" style="width: 97%;">
-            <div class="bg-white row py-5">
+        <div class="container-fluid" style="width: 97%;">
+            <div class="bg-white row py-4">
                 <div class="col-4 border-end">
-                    <h6 class="fw-bold mb-3">작성한 리뷰</h6>
-                    <p class="fs-6 fw-bold mb-0" th:text="${{my.reviewCount}}"></p>
+                    <a class="text-decoration-none text-black" th:href="@{/reviews}">
+                        <h6 class="fw-bold mb-3">작성한 리뷰</h6>
+                        <p class="fs-6 fw-bold mb-0" th:text="${{my.reviewCount}}"></p>
+                    </a>
                 </div>
 
                 <div class="col-4 border-end">
-                    <h6 class="fw-bold mb-3">리워드</h6>
-                    <p class="fw-bold fs-6 mb-0" th:text="${{my.point}}"></p>
+                    <a class="text-decoration-none text-black" th:href="@{/points}">
+                        <h6 class="fw-bold mb-3">리워드</h6>
+                        <p class="fw-bold fs-6 mb-0" th:text="${{my.point}}"></p>
+                    </a>
                 </div>
 
                 <div class="col-4">
-                    <h6 class="fw-bold mb-3">쿠폰</h6>
-                    <p class="fw-bold fs-6 mb-0" th:text="${{my.couponCount}}"></p>
+                    <a class="text-decoration-none text-black" th:href="@{/coupons}">
+                        <h6 class="fw-bold mb-3">쿠폰</h6>
+                        <p class="fw-bold fs-6 mb-0" th:text="${{my.couponCount}}"></p>
+                    </a>
                 </div>
             </div>
         </div>
