@@ -104,12 +104,32 @@ public class MyPageService {
 
     /**
      * 마이페이지 예약 상세 조회
+     * @param reservationId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Reservation findMyReservation(Long reservationId) {
+        return reservationRepository.findById(reservationId).get();
+    }
+
+    /**
+     * 마이페이지 주문 내역 조회
      * @param userId
      * @return
      */
     @Transactional(readOnly = true)
-    public Reservation findMyReservation(Long userId) {
-        return reservationRepository.findById(userId).get();
+    public List<Payment> findMyOrders(Long userId) {
+        return paymentRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
+    }
+
+    /**
+     * 마이페이지 주문 내역 상세 조회
+     * @param paymentId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Payment findMyOrdersDetails(Long paymentId) {
+        return paymentRepository.findById(paymentId).get();
     }
 
     /**

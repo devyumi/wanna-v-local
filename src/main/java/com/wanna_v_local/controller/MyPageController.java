@@ -70,6 +70,22 @@ public class MyPageController {
         return "user/my-likes";
     }
 
+    @GetMapping("orders")
+    public String getMyOrders(Model model) {
+        model.addAttribute("myOrders", myPageService.findMyOrders(1L));
+        return "user/my-order";
+    }
+
+    @PostMapping("orders/{id}")
+    public String getMyOrdersDetails(@PathVariable Long id, Model model) {
+        if (id == null) {
+            log.info("주문 정보를 찾을 수 없습니다.");
+            return "redirect:/orders";
+        }
+        model.addAttribute("myOrders", myPageService.findMyOrdersDetails(id));
+        return "user/my-order-details";
+    }
+
     @GetMapping("points")
     public String getMyPoints(Model model) {
         model.addAttribute("myPoints", myPageService.findMyPoints(1L));
