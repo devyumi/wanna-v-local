@@ -70,6 +70,13 @@ public class MyPageController {
         return "user/my-likes";
     }
 
+    @GetMapping("points")
+    public String getMyPoints(Model model) {
+        model.addAttribute("myPoints", myPageService.findMyPoints(1L));
+        model.addAttribute("sum", myPageService.findUserInfo(1L));
+        return "user/my-point";
+    }
+
     private static void printErrorLog(BindingResult result) {
         log.info("{}", "*".repeat(20));
         for (FieldError fieldError : result.getFieldErrors()) {
