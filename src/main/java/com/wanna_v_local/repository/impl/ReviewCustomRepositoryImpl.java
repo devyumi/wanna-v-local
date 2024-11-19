@@ -49,31 +49,23 @@ public class ReviewCustomRepositoryImpl implements ReviewCustomRepository {
 
     /**
      * 동적쿼리 메서드
+     *
      * @param result
      * @param reviewRequestDTO
      */
     public void processWhere(JPAQuery<?> result, ReviewRequestDTO reviewRequestDTO) {
+
         if (reviewRequestDTO.getKeyword() == null) {
-            switch (reviewRequestDTO.getType()) {
-                //최신순
-                case "new" -> {
-                    result.orderBy(review.id.desc());
-                }
-
-                //등록순
-                case "old" -> {
-                    result.orderBy(review.id.asc());
-                }
-
-                //별점
-                case "rating" -> {
-                    result.where(review.rating.eq(Integer.parseInt(reviewRequestDTO.getScore())));
-                }
-
-                //상태
-                case "status" -> {
-                    result.where(review.isActive.eq(Boolean.parseBoolean(reviewRequestDTO.getIsActive())));
-                }
+            if (reviewRequestDTO.getType() == null) {
+                result.orderBy(review.id.desc());
+            } else if (reviewRequestDTO.getType().equals("new")) {
+                result.orderBy(review.id.desc());
+            } else if (reviewRequestDTO.getType().equals("old")) {
+                result.orderBy(review.id.asc());
+            } else if (reviewRequestDTO.getType().equals("rating")) {
+                result.where(review.rating.eq(Integer.parseInt(reviewRequestDTO.getScore())));
+            } else if (reviewRequestDTO.getType().equals("status")) {
+                result.where(review.isActive.eq(Boolean.parseBoolean(reviewRequestDTO.getIsActive())));
             }
         } else {
             //키워드 검색
