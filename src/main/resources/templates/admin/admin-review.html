@@ -124,8 +124,8 @@
               <nav class="mt-2 mt-md-0">
                   <ul class="pagination mb-0">
                       <li class="page-item">
-                          <a class="page-link" th:if="${reviews.type} == null" th:href="@{/admin-reviews(page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
-                          <a class="page-link" th:if="${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == null and ${reviews.keyword} == null" th:href="@{/admin-reviews(page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == null and ${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
                           <a class="page-link" th:if="${reviews.type} == 'new'" th:href="@{/admin-reviews(type='new', page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
                           <a class="page-link" th:if="${reviews.type} == 'old'" th:href="@{/admin-reviews(type='old', page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
                           <a class="page-link" th:if="${reviews.score} != null" th:href="@{/admin-reviews(type='rating', score=${reviews.score}, page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
@@ -133,8 +133,8 @@
                       </li>
 
                       <li class="page-item" th:each="i : ${#numbers.sequence(reviews.start, reviews.end)}">
-                          <a class="page-link" th:text="${i}" th:if="${reviews.type} == null" th:href="@{/admin-reviews(page=${i})}"></a>
-                          <a class="page-link" th:text="${i}" th:if="${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${i})}"></a>
+                          <a class="page-link" th:text="${i}" th:if="${reviews.type} == null and ${reviews.keyword} == null" th:href="@{/admin-reviews(page=${i})}"></a>
+                          <a class="page-link" th:text="${i}" th:if="${reviews.type} == null and ${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${i})}"></a>
                           <a class="page-link" th:text="${i}" th:if="${reviews.type} == 'new'" th:href="@{/admin-reviews(type='new', page=${i})}"></a>
                           <a class="page-link" th:text="${i}" th:if="${reviews.type} == 'old'" th:href="@{/admin-reviews(type='old', page=${i})}"></a>
                           <a class="page-link" th:text="${i}" th:if="${reviews.score} != null" th:href="@{/admin-reviews(type='rating', score=${reviews.score}, page=${i})}"></a>
@@ -142,8 +142,8 @@
                       </li>
 
                       <li class="page-item">
-                          <a class="page-link" th:if="${reviews.type} == null" th:href="@{/admin-reviews(page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
-                          <a class="page-link" th:if="${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == null and ${reviews.keyword} == null" th:href="@{/admin-reviews(page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == null and ${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
                           <a class="page-link" th:if="${reviews.type} == 'new'" th:href="@{/admin-reviews(type='new', page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
                           <a class="page-link" th:if="${reviews.type} == 'old'" th:href="@{/admin-reviews(type='old', page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
                           <a class="page-link" th:if="${reviews.score} != null" th:href="@{/admin-reviews(type='rating', score=${reviews.score}, page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
