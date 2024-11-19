@@ -1,703 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin-layout}"
+>
 <head>
-  <!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta content="Codescandy" name="author">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-M8S4MT3EYG');
-</script>
-
-<!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
-
-
-<!-- Libs CSS -->
-<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="../assets/libs/feather-webfont/dist/feather-icons.css" rel="stylesheet">
-<link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
-
-
-<!-- Theme CSS -->
-<link rel="stylesheet" href="../assets/css/theme.min.css">
-
-
-  <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Review Page</title>
 </head>
-
-<body>
-
-
-  <nav class="navbar navbar-expand-lg navbar-glass">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center w-100">
-            <div class="d-flex align-items-center">
-
-                <a class="text-inherit d-block d-xl-none me-4" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                aria-controls="offcanvasExample">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-text-indent-right" viewBox="0 0 16 16">
-                    <path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm10.646 2.146a.5.5 0 0 1 .708.708L11.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zM2 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-                  </svg>
-            </a>
-
-                <form role="search">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-
-                </form>
-            </div>
-            <div>
-                <ul class="list-unstyled d-flex align-items-center mb-0 ms-5 ms-lg-0">
-
-                    <li class="dropdown ">
-                        <a class="position-relative btn-icon btn-ghost-secondary btn rounded-circle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-bell fs-5"></i>
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2 ms-n2">
-                                2
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg p-0 border-0 ">
-                            <div class="border-bottom p-5 d-flex
-              justify-content-between align-items-center">
-              <div>
-                                <h5 class="mb-1">Notifications</h5>
-                                <p class="mb-0 small">You have 2 unread messages</p>
-                            </div>
-                                <a href="#!" class="text-muted">
-                                    <a href="#" class="btn btn-ghost-secondary btn-icon rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Mark all as read">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-check2-all text-success" viewBox="0 0 16 16">
-                                            <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
-                                            <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
-                                          </svg>
-                                        </a>
-                                </a>
-                            </div>
-                            <div data-simplebar style="height: 250px;">
-                                <!-- List group -->
-                                <ul class="list-group list-group-flush notification-list-scroll fs-6">
-                                    <!-- List group item -->
-                                    <li class="list-group-item px-5 py-4 list-group-item-action active">
-                                        <a href="#!" class="text-muted">
-                                            <div class="d-flex">
-                                           <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle ">
-                                           <div class="ms-4">
-                                           <p class="mb-1">
-                                                <span class="text-dark">Your order is placed</span> waiting for shipping
-                                            </p>
-                                           <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock text-muted" viewBox="0 0 16 16">
-                                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                                          </svg><small class="ms-2">1 minute ago</small></span>
-                                        </div>
-                                            </div>
-                                        </a>
-
-
-
-                                    </li>
-                                    <li class="list-group-item  px-5 py-4 list-group-item-action">
-                                        <a href="#!" class="text-muted">
-                                            <div class="d-flex">
-                                           <img src="../assets/images/avatar/avatar-5.jpg" alt="" class="avatar avatar-md rounded-circle ">
-                                           <div class="ms-4">
-                                           <p class="mb-1">
-                                                <span class="text-dark">Jitu Chauhan </span> answered to your pending order list with notes
-                                            </p>
-                                           <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock text-muted" viewBox="0 0 16 16">
-                                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                                          </svg><small class="ms-2">2 days ago</small></span>
-                                        </div>
-                                            </div>
-                                        </a>
-
-
-
-                                    </li>
-                                    <li class="list-group-item px-5 py-4 list-group-item-action">
-                                        <a href="#!" class="text-muted">
-                                            <div class="d-flex">
-                                           <img src="../assets/images/avatar/avatar-2.jpg" alt="" class="avatar avatar-md rounded-circle ">
-                                           <div class="ms-4">
-                                           <p class="mb-1">
-                                                <span class="text-dark">You have new messages</span> 2 unread messages
-                                            </p>
-                                           <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock text-muted" viewBox="0 0 16 16">
-                                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                                          </svg><small class="ms-2">3 days ago</small></span>
-                                        </div>
-                                            </div>
-                                        </a>
-
-
-
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="border-top px-5 py-4 text-center">
-                                <a href="#!" class=" ">
-                                    View All
-                                </a>
-                            </div>
-                        </div>
-
-        </li>
-        <li class="dropdown ms-4">
-            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-end p-0">
-
-
-
-                    <div class="lh-1 px-5 py-4 border-bottom">
-                        <h5 class="mb-1 h6">FreshCart Admin</h5>
-                        <small>admindemo@email.com</small>
-                    </div>
-
-
-
-                <ul class="list-unstyled px-2 py-3">
-
-                    <li>
-                        <a class="dropdown-item" href="#!">
-                           Home
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#!">
-                        Profile
-                        </a>
-
-
-                    </li>
-
-
-                    <li>
-                        <a class="dropdown-item" href="#!">
-
-                           Settings
-                        </a>
-                    </li>
-
-                </ul>
-                <div class="border-top px-5 py-3">
-
-                    <a href="#">Log Out</a>
-                </div>
-
-
-
-            </div>
-
-        </li>
-        </ul>
-
-    </div>
-
-    </div>
-    </div>
-</nav>
-  <!-- main wrapper-->
-  <div class="main-wrapper">
-    <!-- navbar vertical -->
-
-            <nav class="navbar-vertical-nav d-none d-xl-block ">
-                <div class="navbar-vertical">
-                                <div class="px-4 py-5">
-                                    <a href="../index.html" class="navbar-brand">
-                                        <img src="../assets/images/logo/freshcart-logo.svg" alt="">
-                                    </a>
-                                </div>
-                                <div class="navbar-vertical-content flex-grow-1" data-simplebar="">
-                                    <ul class="navbar-nav flex-column" id="sideNavbar">
-
-                                        <li class="nav-item ">
-                                            <a class="nav-link " href="../dashboard/index.html" >
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-house"></i></span>
-                                                    <span class="nav-link-text">Dashboard</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mt-6 mb-3">
-                                            <span class="nav-label">Store Managements</span></li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link "  href="../dashboard/products.html">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-cart"></i></span>
-                                                    <span class="nav-link-text">Products</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link " href="../dashboard/categories.html">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-list-task"></i></span>
-                                                    <span class="nav-link-text">Categories</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link   collapsed " href="#"
-                                                data-bs-toggle="collapse" data-bs-target="#navCategoriesOrders" aria-expanded="false"
-                                                aria-controls="navCategoriesOrders">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-bag"></i></span>
-                                                    <span class="nav-link-text">Orders</span>
-                                                </div>
-                                            </a>
-                                            <div id="navCategoriesOrders" class="collapse "
-                                                data-bs-parent="#sideNavbar">
-                                                <ul class="nav flex-column">
-                                                    <li class="nav-item ">
-                                                        <a class="nav-link "
-                                                            href="../dashboard/order-list.html">
-                                                            List
-                                                        </a>
-                                                    </li>
-                                                    <!-- Nav item -->
-                                                    <li class="nav-item ">
-                                                        <a class="nav-link "
-                                                            href="../dashboard/order-single.html">
-                                                            Single
-
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                        <li class="nav-item ">
-                                            <a class="nav-link " href="../dashboard/vendor-grid.html">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-shop"></i></span>
-                                                    <span class="nav-link-text">Sellers / Vendors</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link " href="../dashboard/customers.html">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-people"></i></span>
-                                                    <span class="nav-link-text">Customers</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link  active " href="../dashboard/reviews.html">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-star"></i></span>
-                                                    <span class="nav-link-text">Reviews</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                         <!-- Nav item -->
- <li class="nav-item">
-    <a class="nav-link  collapsed " href="#"
-        data-bs-toggle="collapse" data-bs-target="#navMenuLevelFirst" aria-expanded="false"
-        aria-controls="navMenuLevelFirst">
-        <span class="nav-link-icon"><i class=" bi bi-arrow-90deg-down"></i></span>
-        <span class="nav-link-text">Menu Level</span>
-    </a>
-    <div id="navMenuLevelFirst" class="collapse "
-        data-bs-parent="#sideNavbar">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link " href="#"
-                    data-bs-toggle="collapse" data-bs-target="#navMenuLevelSecond1" aria-expanded="false"
-                    aria-controls="navMenuLevelSecond1">
-                    Two Level
-                </a>
-                <div id="navMenuLevelSecond1" class="collapse" data-bs-parent="#navMenuLevel">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link "
-                                href="#">NavItem 1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link "
-                                href="#">NavItem 2</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link  collapsed  " href="#"
-                    data-bs-toggle="collapse" data-bs-target="#navMenuLevelThreeOne1" aria-expanded="false"
-                    aria-controls="navMenuLevelThreeOne1">
-                    Three Level
-                </a>
-                <div id="navMenuLevelThreeOne1"
-                    class="collapse "
-                    data-bs-parent="#navMenuLevel">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link  collapsed "
-                                href="#" data-bs-toggle="collapse" data-bs-target="#navMenuLevelThreeTwo"
-                                aria-expanded="false" aria-controls="navMenuLevelThreeTwo">
-                                NavItem 1
-                            </a>
-                            <div id="navMenuLevelThreeTwo"
-                                class="collapse collapse "
-                                data-bs-parent="#navMenuLevelThree">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                            href="#">
-                                            NavChild Item 1
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="#">Nav
-                                Item 2</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
-</li>
-
-                                        <li class="nav-item mt-6 mb-3">
-                                            <span class="nav-label">Site Settings</span> <span class="badge bg-light-info text-dark-info">Coming Soon</span></li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#!">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-newspaper"></i></span>
-                                                    <span class="nav-link-text">Blog</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#!">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-images"></i></span>
-                                                    <span class="nav-link-text">Media</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#!">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-gear"></i></span>
-                                                    <span class="nav-link-text">Store Settings</span>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item mt-6 mb-3">
-                                            <span class="nav-label">Support</span> <span class="badge bg-light-info text-dark-info">Coming Soon</span></li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#!">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-headphones"></i></span>
-                                                    <span class="nav-link-text">Support Ticket</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-question-circle"></i></span>
-                                                    <span class="nav-link-text">Help Center</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#!">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-infinity"></i></span>
-                                                    <span class="nav-link-text">How FreshCart Works</span>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item mt-6 mb-3">
-                                            <span class="nav-label">Our Apps</span></li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#!">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-apple"></i></span>
-                                                    <span class="nav-link-text">Apple Store</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link disabled" href="#!">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="nav-link-icon"> <i class="bi bi-google-play"></i></span>
-                                                    <span class="nav-link-text">Google Play Store</span>
-                                                </div>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-                            </div>
-                            </nav>
-
-                            <nav class="navbar-vertical-nav offcanvas offcanvas-start navbar-offcanvac" tabindex="-1" id="offcanvasExample" >
-                                <div class="navbar-vertical">
-                                                <div class="px-4 py-5 d-flex justify-content-between align-items-center">
-                                                    <a href="../index.html" class="navbar-brand">
-                                                        <img src="../assets/images/logo/freshcart-logo.svg" alt="">
-                                                    </a>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                                </div>
-                                                <div class="navbar-vertical-content flex-grow-1" data-simplebar="">
-                                                    <ul class="navbar-nav flex-column">
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link " href="../dashboard/index.html" >
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-house"></i></span>
-                                                                    <span>Dashboard</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item mt-6 mb-3">
-                                                            <span class="nav-label">Store Managements</span></li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link "  href="../dashboard/products.html">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-cart"></i></span>
-                                                                    <span class="nav-link-text">Products</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link " href="../dashboard/categories.html">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-list-task"></i></span>
-                                                                    <span class="nav-link-text">Categories</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link   collapsed " href="#"
-                                                                data-bs-toggle="collapse" data-bs-target="#navOrders" aria-expanded="false"
-                                                                aria-controls="navOrders">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-bag"></i></span>
-                                                                    <span class="nav-link-text">Orders</span>
-                                                                </div>
-                                                            </a>
-                                                            <div id="navOrders" class="collapse "
-                                                                data-bs-parent="#sideNavbar">
-                                                                <ul class="nav flex-column">
-                                                                    <li class="nav-item ">
-                                                                        <a class="nav-link "
-                                                                            href="../dashboard/order-list.html">
-                                                                            List
-                                                                        </a>
-                                                                    </li>
-                                                                    <!-- Nav item -->
-                                                                    <li class="nav-item ">
-                                                                        <a class="nav-link "
-                                                                            href="../dashboard/order-single.html">
-                                                                            Single
-
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link " href="../dashboard/vendor-grid.html">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-shop"></i></span>
-                                                                    <span class="nav-link-text">Sellers / Vendors</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link " href="../dashboard/customers.html">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-people"></i></span>
-                                                                    <span class="nav-link-text">Customers</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link  active " href="../dashboard/reviews.html">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-star"></i></span>
-                                                                    <span class="nav-link-text">Reviews</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item mt-6 mb-3">
-                                                            <span class="nav-label">Site Settings</span> <span class="badge bg-light-info text-dark-info">Coming Soon</span></li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#!">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-newspaper"></i></span>
-                                                                    <span class="nav-link-text">Blog</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-images"></i></span>
-                                                                    <span class="nav-link-text">Media</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#!">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-gear"></i></span>
-                                                                    <span class="nav-link-text">Store Settings</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item mt-6 mb-3">
-                                                            <span class="nav-label">Support</span> <span class="badge bg-light-info text-dark-info">Coming Soon</span></li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#!">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-headphones"></i></span>
-                                                                    <span class="nav-link-text">Support Ticket</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-question-circle"></i></span>
-                                                                    <span class="nav-link-text">Help Center</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#!">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-infinity"></i></span>
-                                                                    <span class="nav-link-text">How FreshCart Works</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-
-                                                        <li class="nav-item mt-6 mb-3">
-                                                            <span class="nav-label">Our Apps</span></li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#!">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-apple"></i></span>
-                                                                    <span class="nav-link-text">Apple Store</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link disabled" href="#!">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="nav-link-icon"> <i class="bi bi-google-play"></i></span>
-                                                                    <span class="nav-link-text">Google Play Store</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li id="navMenuLevel" class="collapse "
-                                                        data-bs-parent="#sideNavbar">
-                                                        <ul class="nav flex-column">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link " href="#"
-                                                                    data-bs-toggle="collapse" data-bs-target="#navMenuLevelSecond2" aria-expanded="false"
-                                                                    aria-controls="navMenuLevelSecond2">
-                                                                    Two Level
-                                                                </a>
-                                                                <div id="navMenuLevelSecond2" class="collapse" data-bs-parent="#navMenuLevel">
-                                                                    <ul class="nav flex-column">
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link "
-                                                                                href="#">NavItem 1</a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link "
-                                                                                href="#">NavItem 2</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link  collapsed  " href="#"
-                                                                    data-bs-toggle="collapse" data-bs-target="#navMenuLevelThree2" aria-expanded="false"
-                                                                    aria-controls="navMenuLevelThree2">
-                                                                    Three Level
-                                                                </a>
-                                                                <div id="navMenuLevelThree2"
-                                                                    class="collapse "
-                                                                    data-bs-parent="#navMenuLevel">
-                                                                    <ul class="nav flex-column">
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link  collapsed "
-                                                                                href="#" data-bs-toggle="collapse" data-bs-target="#navMenuLevelThree3"
-                                                                                aria-expanded="false" aria-controls="navMenuLevelThree3">
-                                                                                NavItem 1
-                                                                            </a>
-                                                                            <div id="navMenuLevelThree3"
-                                                                                class="collapse collapse "
-                                                                                data-bs-parent="#navMenuLevelThree">
-                                                                                <ul class="nav flex-column">
-                                                                                    <li class="nav-item">
-                                                                                        <a class="nav-link "
-                                                                                            href="#">
-                                                                                            NavChild Item 1
-                                                                                        </a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link " href="#">Nav
-                                                                                Item 2</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            </nav>
-
-
-<!-- main -->
-<main class="main-content-wrapper">
+<body id="body">
+<main layout:fragment="main-content" th:class="main-container" style="margin-top: 5%; margin-left: 17.5rem">
   <div class="container">
     <div class="row mb-8">
       <div class="col-md-12">
         <div>
-          <!-- page header -->
           <h2>리뷰 관리</h2>
-          <!-- breacrumb -->
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a href="#" class="text-inherit">리뷰 관리</a></li>
-              <li class="breadcrumb-item active" aria-current="page">리뷰 목록</li>
+              <li class="breadcrumb-item fw-bold"><a href="#" class="text-inherit">리뷰 관리</a></li>
+              <li class="breadcrumb-item active fw-bold" aria-current="page">리뷰 목록</li>
             </ol>
           </nav>
 
@@ -711,13 +32,14 @@
 
             <!--필터링 Start-->
             <div class="p-6 d-flex">
-                <form class="me-auto" role="search">
-                    <input class="form-control" type="search" placeholder="내용을 입력하세요." aria-label="Search">
+                <form th:method="get" class="me-auto" role="search">
+                    <input id="keyword" name="keyword" class="form-control" type="search" placeholder="내용을 입력하세요." aria-label="Search">
                 </form>
 
                 <div class="ms-2">
-                    <select class="form-select" id="type" onchange="filtering()">
-                        <option selected value="new">최신순</option>
+                    <select class="form-select" id="type" name="type" onchange="filtering(this)">
+                        <option>선택</option>
+                        <option value="new">최신순</option>
                         <option value="old">등록순</option>
                         <option value="rating">별점</option>
                         <option value="status">상태</option>
@@ -725,8 +47,9 @@
                 </div>
 
                 <div class="ms-2" style="display: none;" id="ratingSub">
-                    <select class="form-select">
-                        <option selected value="5">5점</option>
+                    <select class="form-select" id="score" name="score" onchange="filterRate(this)">
+                        <option>선택</option>
+                        <option value="5">5점</option>
                         <option value="4">4점</option>
                         <option value="3">3점</option>
                         <option value="2">2점</option>
@@ -735,12 +58,14 @@
                 </div>
 
                 <div class="ms-2" style="display: none;" id="statusSub">
-                    <select class="form-select">
-                        <option selected value="true">게시</option>
-                        <option value="false">삭제</option>
+                    <select class="form-select" id="isActive" name="isActive" onchange="filterActive(this)">
+                        <option>선택</option>
+                        <option value="true">게시</option>
+                        <option value="false">숨김</option>
                     </select>
                 </div>
             </div>
+
           <!--필터링 End-->
 
           <!-- card body -->
@@ -759,33 +84,35 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>10</td>
+                  <tr th:each="review: ${reviews.reviews}">
+                    <td th:text="${review.id}"></td>
 
-                    <td>2024-11-12</td>
+                    <td th:text="${review.createdAt.toLocalDate()}"></td>
                     <td>
-                      <p class="mb-0">뷰리풀</p>
-                      <p class="mb-0">beautiful123</p>
-                      <p class="mb-0">새싹 등급</p>
+                      <p th:text="${review.user.username}" class="mb-0"></p>
+                      <p th:text="${review.user.email}" class="mb-0"></p>
                     </td>
 
                     <td>
-                      <p class="mb-0">다켄씨엘</p>
-                      <p class="mb-0">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                      </p>
+                      <p th:text="${review.restaurant.name}" class="mb-0"></p>
+                        <div class="d-flex justify-content-center">
+                          <span th:each="i : ${#numbers.sequence(1, review.rating)}">
+                            <p class="text-warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                            </p>
+                          </span>
+                        </div>
                     </td>
 
                     <td>
-                      <span class="text-truncate" style="display: inline-block; width: 40rem;"><a href="#" class="text-reset">너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 너무 맛있어여 </a></span>
+                      <span class="text-truncate" style="display: inline-block; width: 33rem;"><a th:href="@{/admin-reviews/{id}(id=${review.id})}" th:text="${review.content}" href="#" class="text-reset"></a></span>
                     </td>
 
                     <td>
-                      <span class="badge bg-light-primary text-dark-primary fs-6">게시</span>
+                        <span th:if="${review.isActive}" th:text="${'게시'}" class="badge bg-light-primary text-dark-primary fs-6"></span>
+                        <span th:if="${!review.isActive}" th:text="${'숨김'}" class="badge bg-light-danger text-dark-danger fs-6"></span>
                     </td>
                   </tr>
                 </tbody>
@@ -793,15 +120,36 @@
             </div>
 
             <div class="border-top d-md-flex justify-content-between align-items-center p-6">
-              <span>Showing 1 to 8 of 12 entries</span>
+              <span th:text="${'총 리뷰 수 ' + reviews.total + '개 / ' + reviews.page + ' 페이지'}"></span>
               <nav class="mt-2 mt-md-0">
-                <ul class="pagination mb-0 ">
-                  <li class="page-item disabled"><a class="page-link " href="#!">Previous</a></li>
-                  <li class="page-item"><a class="page-link active" href="#!">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">Next</a></li>
-                </ul>
+                  <ul class="pagination mb-0">
+                      <li class="page-item">
+                          <a class="page-link" th:if="${reviews.type} == null" th:href="@{/admin-reviews(page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == 'new'" th:href="@{/admin-reviews(type='new', page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == 'old'" th:href="@{/admin-reviews(type='old', page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.score} != null" th:href="@{/admin-reviews(type='rating', score=${reviews.score}, page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.isActive} != null" th:href="@{/admin-reviews(type='status', isActive=${reviews.isActive}, page=${reviews.page - 10 >= 1 ? reviews.page - 10 : 1})}">Previous</a>
+                      </li>
+
+                      <li class="page-item" th:each="i : ${#numbers.sequence(reviews.start, reviews.end)}">
+                          <a class="page-link" th:text="${i}" th:if="${reviews.type} == null" th:href="@{/admin-reviews(page=${i})}"></a>
+                          <a class="page-link" th:text="${i}" th:if="${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${i})}"></a>
+                          <a class="page-link" th:text="${i}" th:if="${reviews.type} == 'new'" th:href="@{/admin-reviews(type='new', page=${i})}"></a>
+                          <a class="page-link" th:text="${i}" th:if="${reviews.type} == 'old'" th:href="@{/admin-reviews(type='old', page=${i})}"></a>
+                          <a class="page-link" th:text="${i}" th:if="${reviews.score} != null" th:href="@{/admin-reviews(type='rating', score=${reviews.score}, page=${i})}"></a>
+                          <a class="page-link" th:text="${i}" th:if="${reviews.isActive} != null" th:href="@{/admin-reviews(type='status', isActive=${reviews.isActive}, page=${i})}"></a>
+                      </li>
+
+                      <li class="page-item">
+                          <a class="page-link" th:if="${reviews.type} == null" th:href="@{/admin-reviews(page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.keyword} != null" th:href="@{/admin-reviews(keyword=${reviews.keyword}, page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == 'new'" th:href="@{/admin-reviews(type='new', page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.type} == 'old'" th:href="@{/admin-reviews(type='old', page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.score} != null" th:href="@{/admin-reviews(type='rating', score=${reviews.score}, page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                          <a class="page-link" th:if="${reviews.isActive} != null" th:href="@{/admin-reviews(type='status', isActive=${reviews.isActive}, page=${reviews.page + 10 <= reviews.last ? reviews.page + 10 : reviews.end})}">Previous</a>
+                      </li>
+                  </ul>
               </nav>
             </div>
           </div>
@@ -809,36 +157,84 @@
       </div>
     </div>
   </div>
-</main>
-
-  <!-- Libs JS -->
-<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
-
-<!-- Theme JS -->
-<script src="../assets/js/theme.min.js"></script>
-
-<!--custom JS-->
 <script>
-  function filtering() {
-    const type = document.getElementById('type').value;
-    const ratingSub = document.getElementById('ratingSub');
-    const statusSub = document.getElementById('statusSub');
+    function filtering(element) {
+        //필터링 동적 변경
+        const type = document.getElementById('type').value;
+        const ratingSub = document.getElementById('ratingSub');
+        const statusSub = document.getElementById('statusSub');
 
-    if (type === 'old' || type == 'new') {
-      ratingSub.style.display = 'none';
-      statusSub.style.display = 'none';
-    } else if (type === 'rating') {
-      ratingSub.style.display = 'block';
-      statusSub.style.display = 'none';
-    } else if (type === 'status') {
-      ratingSub.style.display = 'none';
-      statusSub.style.display = 'block';
+        if (type === 'old' || type === 'new') {
+            ratingSub.style.display = 'none';
+            statusSub.style.display = 'none';
+        } else if (type === 'rating') {
+            ratingSub.style.display = 'block';
+            statusSub.style.display = 'none';
+        } else if (type === 'status') {
+            ratingSub.style.display = 'none';
+            statusSub.style.display = 'block';
+        }
+
+        //데이터 전송
+        if(type === 'new' || type === 'old') {
+            axios.get('admin-reviews', {
+                params: {
+                    type: type
+                }
+            })
+            .then(response => {
+                const reviews = response.data;
+                console.log(reviews);
+                document.getElementById('body').innerHTML = reviews;
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+        }
     }
-  }
+
+    function filterRate(element) {
+        const score = document.getElementById('score').value;
+        console.log('score: ' + score);
+        if(score != '선택') {
+            axios.get('/admin-reviews', {
+                params: {
+                    type: 'rating',
+                    score: score
+                }
+            })
+            .then(response => {
+                const reviews = response.data;
+                console.log(reviews);
+                document.getElementById('body').innerHTML = reviews;
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+        }
+    }
+
+    function filterActive(element) {
+        const isActive = document.getElementById('isActive').value;
+        console.log('ac: ' + isActive)
+        if (isActive != '선택') {
+            axios.get('/admin-reviews', {
+                params: {
+                    type: 'status',
+                    isActive: isActive
+                }
+            })
+            .then(response => {
+                const reviews = response.data;
+                console.log(reviews);
+                document.getElementById('body').innerHTML = reviews;
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+        }
+    }
 </script>
-
+</main>
 </body>
-
 </html>
