@@ -27,12 +27,16 @@
     <div class="container bg-white border">
         <div class="d-flex mb-2" th:each="orderProduct: ${myOrders.paymentItems}">
             <div class="col-4 mt-2">
-                <img class="w-100" style="height: 150px" th:src="${orderProduct.product.image}" alt="">
+                <a th:href="@{/products/{id}(id=${orderProduct.product.id})}">
+                    <img class="w-100" style="height: 150px; object-fit: contain" th:src="${orderProduct.product.image}" alt="">
+                </a>
             </div>
 
             <div class="col-8">
                 <div class="p-4 h-100">
-                    <h6 class="fw-bold" th:text="${orderProduct.product.name}"></h6>
+                    <a class="text-decoration-none text-black" th:href="@{/products/{id}(id=${orderProduct.product.id})}">
+                        <h6 class="fw-bold" th:text="${orderProduct.product.name}"></h6>
+                    </a>
                     <small class="text-secondary text-opacity-75" th:text="${'수량: ' + orderProduct.quantity + '개'}"></small>
                     <h6 class="fw-bold mt-3" th:text="${#numbers.formatInteger(orderProduct.product.finalPrice, 0, 'COMMA')} + '원'"></h6>
                 </div>
@@ -49,7 +53,7 @@
     <div class="container bg-white border">
         <table class="table table-borderless mb-2 fw-bold text-black">
             <tr>
-                <td class="fw-bold" style="40%">받는 사람</td>
+                <td class="fw-bold" style="width: 40%">받는 사람</td>
                 <td class="fw-bold text-end" th:text="${myOrders.user.name}"></td>
             </tr>
 
@@ -65,7 +69,7 @@
 
             <tr>
                 <td class="fw-bold" style="width: 40%">요청 사항</td>
-                <td class="fw-bold text-end">문 앞에 놓아주세요.</td>
+                <td class="fw-bold text-end" th:text="${myOrders.note}"></td>
             </tr>
         </table>
     </div>
