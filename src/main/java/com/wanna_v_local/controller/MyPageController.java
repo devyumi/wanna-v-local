@@ -99,6 +99,13 @@ public class MyPageController {
         return "user/my-coupon";
     }
 
+    @GetMapping("reviews")
+    public String getMyReviews(Model model) {
+        model.addAttribute("myReviews", myPageService.findMyReviews(1L));
+        model.addAttribute("reviewSum", myPageService.findMyPage(1L).getReviewCount());
+        return "user/my-review";
+    }
+
     private static void printErrorLog(BindingResult result) {
         log.info("{}", "*".repeat(20));
         for (FieldError fieldError : result.getFieldErrors()) {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,6 +27,7 @@ public class MyPageService {
     private final PaymentRepository paymentRepository;
     private final PointLogRepository pointLogRepository;
     private final UserCouponRepository userCouponRepository;
+    private final ReviewRepository reviewRepository;
 
     /**
      * 마이페이지 메인 조회
@@ -102,6 +104,7 @@ public class MyPageService {
 
     /**
      * 마이페이지 예약 상세 조회
+     *
      * @param reservationId
      * @return
      */
@@ -112,6 +115,7 @@ public class MyPageService {
 
     /**
      * 마이페이지 주문 내역 조회
+     *
      * @param userId
      * @return
      */
@@ -122,6 +126,7 @@ public class MyPageService {
 
     /**
      * 마이페이지 주문 내역 상세 조회
+     *
      * @param paymentId
      * @return
      */
@@ -132,6 +137,7 @@ public class MyPageService {
 
     /**
      * 마이페이지 포인트 내역 조회
+     *
      * @param userId
      * @return
      */
@@ -142,11 +148,23 @@ public class MyPageService {
 
     /**
      * 마이페이지 쿠폰 내역 조회
+     *
      * @param userId
      * @return
      */
     @Transactional(readOnly = true)
     public List<UserCoupon> findMyCoupons(Long userId) {
         return userCouponRepository.findAllByUserIdAndEndDate(userId);
+    }
+
+    /**
+     * 마이페이지 리뷰 내역 조회
+     *
+     * @param userId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<Review> findMyReviews(Long userId) {
+        return reviewRepository.findAllByUserIdDesc(userId);
     }
 }

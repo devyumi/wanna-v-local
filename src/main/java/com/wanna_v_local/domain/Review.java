@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -44,4 +45,7 @@ public class Review {
 
     private Boolean isActive;
     private String note;
+
+    @OneToMany(mappedBy = "review")
+    private List<ReviewTag> reviewTags;
 }

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +22,7 @@ public class Tag {
 
     private String category;
     private String name;
+
+    @OneToMany(mappedBy = "tag")
+    private List<ReviewTag> reviewTags;
 }
