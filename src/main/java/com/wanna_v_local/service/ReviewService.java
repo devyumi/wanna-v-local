@@ -1,13 +1,20 @@
 package com.wanna_v_local.service;
 
+import com.wanna_v_local.domain.Restaurant;
 import com.wanna_v_local.domain.Review;
+import com.wanna_v_local.domain.ReviewTag;
+import com.wanna_v_local.domain.Tag;
 import com.wanna_v_local.dto.request.ReviewRequestDTO;
+import com.wanna_v_local.dto.request.ReviewSaveDTO;
 import com.wanna_v_local.dto.response.ReviewResponseDTO;
 import com.wanna_v_local.repository.ReviewRepository;
+import com.wanna_v_local.repository.ReviewTagRepository;
+import com.wanna_v_local.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -15,6 +22,13 @@ import java.time.LocalDateTime;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final UserRepository userRepository;
+    private final ReviewTagRepository reviewTagRepository;
+
+    /**********************USER************************/
+
+
+    /**********************ADMIN************************/
 
     /**
      * 리뷰 전체 조회 (페이징 및 필터링 적용)
