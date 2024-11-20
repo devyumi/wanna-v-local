@@ -183,9 +183,7 @@
                 }
             })
             .then(response => {
-                const reviews = response.data;
-                console.log(reviews);
-                document.getElementById('body').innerHTML = reviews;
+                document.getElementById('body').innerHTML = response.data;
             })
             .catch(error => {
                 console.error('Error: ', error);
@@ -195,7 +193,6 @@
 
     function filterRate(element) {
         const score = document.getElementById('score').value;
-        console.log('score: ' + score);
         if(score != '선택') {
             axios.get('/admin-reviews', {
                 params: {
@@ -204,9 +201,7 @@
                 }
             })
             .then(response => {
-                const reviews = response.data;
-                console.log(reviews);
-                document.getElementById('body').innerHTML = reviews;
+                document.getElementById('body').innerHTML = response.data;
             })
             .catch(error => {
                 console.error('Error: ', error);
@@ -216,7 +211,6 @@
 
     function filterActive(element) {
         const isActive = document.getElementById('isActive').value;
-        console.log('ac: ' + isActive)
         if (isActive != '선택') {
             axios.get('/admin-reviews', {
                 params: {
@@ -225,9 +219,7 @@
                 }
             })
             .then(response => {
-                const reviews = response.data;
-                console.log(reviews);
-                document.getElementById('body').innerHTML = reviews;
+                document.getElementById('body').innerHTML = response.data;
             })
             .catch(error => {
                 console.error('Error: ', error);
