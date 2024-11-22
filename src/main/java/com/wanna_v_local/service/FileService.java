@@ -6,7 +6,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.wanna_v_local.dto.request.FileDTO;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,6 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class FileService {
 
     private final AmazonS3Client amazonS3Client;
@@ -31,7 +29,6 @@ public class FileService {
 
     public String getUuidFileName(String fileName) {
         String ext = fileName.substring(fileName.lastIndexOf(".") + 1); //파일 확장자 (ex. png, jpg ...)
-        log.info("ext: {}", ext);
         return UUID.randomUUID() + "." + ext;
     }
 
@@ -43,9 +40,6 @@ public class FileService {
             String uploadFileName = getUuidFileName(originalFileName);
             String uploadFileUrl = "";
 
-            log.info("originalFileName: {}", originalFileName);
-            log.info("uploadFileName: {}", uploadFileName);
-
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentLength(multipartFile.getSize());
             objectMetadata.setContentType(multipartFile.getContentType());
@@ -53,15 +47,12 @@ public class FileService {
             try (InputStream inputStream = multipartFile.getInputStream()) {
                 String keyName = filePath + "/" + uploadFileName;   //directory/UUID.png
 
-                log.info("keyName: {}", keyName);
-
                 amazonS3Client.putObject(
                         new PutObjectRequest(bucketName, keyName, inputStream, objectMetadata)
                                 .withCannedAcl(CannedAccessControlList.PublicRead));    //img url 생성
 
                 uploadFileUrl = amazonS3Client.getUrl(bucketName, keyName).toString(); //S3에서 파일 URL을 가져옴
 
-                log.info("uploadFileUrl: {}", uploadFileUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
