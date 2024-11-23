@@ -1,32 +1,86 @@
 package com.wanna_v_local.service;
 
-import com.wanna_v_local.domain.Restaurant;
 import com.wanna_v_local.domain.Review;
 import com.wanna_v_local.domain.ReviewTag;
-import com.wanna_v_local.domain.Tag;
+import com.wanna_v_local.dto.request.FileDTO;
 import com.wanna_v_local.dto.request.ReviewRequestDTO;
 import com.wanna_v_local.dto.request.ReviewSaveDTO;
 import com.wanna_v_local.dto.response.ReviewResponseDTO;
 import com.wanna_v_local.repository.ReviewRepository;
 import com.wanna_v_local.repository.ReviewTagRepository;
+import com.wanna_v_local.repository.TagRepository;
 import com.wanna_v_local.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewService {
 
+    private final FileService fileService;
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
+    private final TagRepository tagRepository;
     private final ReviewTagRepository reviewTagRepository;
+
+    @Value("${file.upload.review}")
+    private String path;
 
     /**********************USER************************/
 
+    /**
+     * 리뷰 저장
+     *
+     * @param userId
+     * @param reviewSaveDTO
+     */
+    @Transactional
+    public void saveReview(Long userId, ReviewSaveDTO reviewSaveDTO) {
+        String imgUrl = "";
+
+        if (!reviewSaveDTO.getFiles().get(0).isEmpty()) {
+            List<FileDTO> files = fileService.uploadFiles(reviewSaveDTO.getFiles(), path);
+            imgUrl = createImageUrl(files);
+        }
+
+        Review review = reviewRepository.save(Review.builder()
+                .restaurant(reviewSaveDTO.getRestaurant())
+                .user(userRepository.findById(userId).get())
+                .rating(reviewSaveDTO.getRating())
+                .content(reviewSaveDTO.getContent())
+                .image(imgUrl.equals("") ? null : imgUrl)
+                .visitDate(reviewSaveDTO.getVisitDate())
+                .createdAt(LocalDateTime.now())
+                .build());
+
+        for (String tagName : reviewSaveDTO.getTagNames()) {
+            reviewTagRepository.save(ReviewTag.builder()
+                    .review(review)
+                    .tag(tagRepository.findByName(tagName))
+                    .build());
+        }
+    }
+
+    /**
+     * DB에 저장되는 imgUrl 생성 - "url,url,url" 형식
+     *
+     * @param fileDTOS
+     * @return
+     */
+    private String createImageUrl(List<FileDTO> fileDTOS) {
+        StringBuilder imgUrl = new StringBuilder();
+        for (FileDTO fileDTO : fileDTOS) {
+            imgUrl.append(fileDTO.getUploadFileUrl()).append(",");
+        }
+        return imgUrl.deleteCharAt(imgUrl.length() - 1).toString();
+    }
 
     /**********************ADMIN************************/
 

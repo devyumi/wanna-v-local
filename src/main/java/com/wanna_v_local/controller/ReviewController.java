@@ -71,6 +71,36 @@ public class ReviewController {
         return "redirect:/reviews/write";
     }
 
+    @GetMapping("reviews/write")
+    public String saveReview(Model model) {
+        Restaurant restaurant = (Restaurant) model.getAttribute("restaurant");
+        LocalDate visitDate = (LocalDate) model.getAttribute("visitDate");
+
+        if (restaurant == null || visitDate == null) {
+            log.info("리뷰 작성 GET 요청 방지");
+            model.addAttribute("alertMessage", "영수증을 먼저 인식해주세요.");
+            return "review/receipt";
+        }
+
+        model.addAttribute("reviewSaveDTO", ReviewSaveDTO.builder().restaurant(restaurant).visitDate(visitDate).build());
+        model.addAttribute("tagsAll", tagService.findTagsForReview());
+        return "review/review-write";
+    }
+
+    @PostMapping("reviews/write")
+    public String saveReview(@ModelAttribute @Validated ReviewSaveDTO reviewSaveDTO, BindingResult bindingResult,
+                             Model model) {
+        if (bindingResult.hasErrors()) {
+            printErrorLog(bindingResult);
+            model.addAttribute("reviewSaveDTO", reviewSaveDTO);
+            model.addAttribute("tagsAll", tagService.findTagsForReview());
+            return "review/review-write";
+        }
+        reviewService.saveReview(1L, reviewSaveDTO);
+        log.info("리뷰 작성 완료");
+        return "redirect:/reviews";
+    }
+
     /**********************ADMIN************************/
 
     @GetMapping("admin-reviews")
