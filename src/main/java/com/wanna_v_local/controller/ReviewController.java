@@ -136,6 +136,20 @@ public class ReviewController {
         return "redirect:/reviews";
     }
 
+    @PostMapping("reviews/{id}/delete")
+    public String deleteReview(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            reviewService.deleteReview(id);
+            log.info("{}번 리뷰 삭제 완료", id);
+            redirectAttributes.addFlashAttribute("alertMessage", "삭제 되었습니다.");
+            return "redirect:/reviews";
+        } catch (Exception e) {
+            log.info("리뷰 삭제 불가");
+            redirectAttributes.addFlashAttribute("alertMessage", e.getMessage());
+            return "redirect:/reviews";
+        }
+    }
+
     /**********************ADMIN************************/
 
     @GetMapping("admin-reviews")

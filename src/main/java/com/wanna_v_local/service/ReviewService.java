@@ -140,6 +140,30 @@ public class ReviewService {
         }
     }
 
+    /**
+     * 리뷰 삭제
+     *
+     * @param reviewId
+     */
+    @Transactional
+    public void deleteReview(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).get();
+
+        //리뷰 작성 후 7일 내 삭제 불가
+        if (!review.getCreatedAt().plusDays(7).isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("리뷰 작성 후 7일 내에는 삭제 불가합니다.");
+        } else {
+            reviewRepository.deleteById(reviewId);
+            List<ReviewTag> reviewTags = reviewTagRepository.findAllByReviewId(reviewId);
+
+            if (reviewTags != null) {
+                for (ReviewTag reviewTag : reviewTags) {
+                    reviewTagRepository.deleteById(reviewTag.getId());
+                }
+            }
+        }
+    }
+
     /**********************ADMIN************************/
 
     /**
