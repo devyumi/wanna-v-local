@@ -25,6 +25,7 @@ import java.util.List;
 public class ReviewService {
 
     private final FileService fileService;
+    private final BadWordService badWordService;
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final TagRepository tagRepository;
@@ -54,7 +55,7 @@ public class ReviewService {
                 .restaurant(reviewSaveDTO.getRestaurant())
                 .user(userRepository.findById(userId).get())
                 .rating(reviewSaveDTO.getRating())
-                .content(reviewSaveDTO.getContent())
+                .content(badWordService.changeBadWord(reviewSaveDTO.getContent()))
                 .image(imgUrl.equals("") ? null : imgUrl)
                 .visitDate(reviewSaveDTO.getVisitDate())
                 .createdAt(LocalDateTime.now())
@@ -105,7 +106,7 @@ public class ReviewService {
                 .restaurant(originalReview.getRestaurant())
                 .user(originalReview.getUser())
                 .rating(reviewUpdateDTO.getRating())
-                .content(reviewUpdateDTO.getContent())
+                .content(badWordService.changeBadWord(reviewUpdateDTO.getContent()))
                 .image(imgUrl.equals("") ? null : imgUrl)
                 .visitDate(originalReview.getVisitDate())
                 .createdAt(LocalDateTime.now())
