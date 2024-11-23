@@ -19,7 +19,7 @@
             <h3 class="fw-bold" style="color: #5AAB6F;"
                 th:text="${coupons.coupon.fixedDiscount == 0 || coupons.coupon.fixedDiscount == null ? #numbers.formatInteger(coupons.coupon.percentageDiscount, 0, 'COMMA') + '%' : #numbers.formatInteger(coupons.coupon.fixedDiscount, 0, 'COMMA') + '원'}"></h3>
             <h5 class="mt-2 fw-bold" th:text="${coupons.coupon.event.title}"></h5>
-            <h6 class="text-muted fw-normal" th:text="${coupons.coupon.event.endDate} + '까지'"></h6>
+            <h6 class="text-muted fw-normal" th:text="${coupons.coupon.endDate.toLocalDate() + ' ' + coupons.coupon.endDate.toLocalTime() + '까지'}"></h6>
           </div>
         </div>
       </div>

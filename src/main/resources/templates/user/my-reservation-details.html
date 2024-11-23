@@ -13,7 +13,7 @@
     <!--날짜-->
   <section class="mt-4">
     <div class="container bg-white border-bottom border-top mb-1 d-flex align-items-center">
-      <h6 class="fw-bold mb-1 mt-2 me-2" th:text="${myReservation.createdAt}"></h6>
+      <h6 class="fw-bold mb-1 mt-2 me-2" th:text="${myReservation.createdAt.toLocalDate()}"></h6>
     </div>
   </section>
 
@@ -31,7 +31,7 @@
 
         <tr>
           <td class="fw-bold">예약일</td>
-          <td class="fw-bold text-end" th:text="${myReservation.reservationDate} + ' ' + ${myReservation.reservationTime}"></td>
+          <td class="fw-bold text-end" th:text="${myReservation.reservationDate.year + '년 ' + myReservation.reservationDate.monthValue + '월 ' + myReservation.reservationDate.dayOfMonth + '일'} + ' ' + ${myReservation.reservationTime}"></td>
         </tr>
 
         <tr>
@@ -39,9 +39,6 @@
           <td class="fw-bold text-end" th:text="${myReservation.guest} + '명'"></td>
         </tr>
       </table>
-      <form th:method="post" th:action="@{/uploads}">
-        <button type="submit" class="btn btn-success w-100 mt-2 mb-3">리&nbsp;뷰&nbsp;쓰&nbsp;기</button>
-      </form>
     </div>
   </section>
 

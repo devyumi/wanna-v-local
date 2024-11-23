@@ -15,8 +15,7 @@
 <section class="fixed-top">
   <div class="row py-3 px-5" style="background-color: #C6E7CE;">
     <p class="fs-6 mt-3 fw-bold text-center">보유</p>
-    <h1 class="me-auto fw-bold text-center" th:text="${sum.point} + 'p'"></h1>
-
+    <h1 class="me-auto fw-bold text-center" th:text="${#numbers.formatInteger(sum.point, 0, 'COMMA')} + 'p'"></h1>
     <!--리워드 안내사항 Start-->
     <div>
       <button class="mt-4 btn btn-light mb-1 fw-bold" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
@@ -44,7 +43,7 @@
   <table class="table table-hover table-borderless">
     <tr style="height: 50px" th:each="pointlog: ${myPoints}">
 
-      <td class="border-top border-bottom fw-bold" th:text="${pointlog.createdAt}"></td>
+      <td class="border-top border-bottom fw-bold" th:text="${pointlog.createdAt.toLocalDate()}"></td>
 
       <td class="fw-bold border-top border-bottom" th:style="'color: ' + (${pointlog.newPoint > pointlog.oldPoint} ? '#5AAB6F' : 'gray')" style="color: #5AAB6F" th:text="${pointlog.newPoint > pointlog.oldPoint ? '적립' : '사용'}"></td>
 
