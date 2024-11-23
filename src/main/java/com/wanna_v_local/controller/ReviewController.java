@@ -89,7 +89,7 @@ public class ReviewController {
 
     @PostMapping("reviews/write")
     public String saveReview(@ModelAttribute @Validated ReviewSaveDTO reviewSaveDTO, BindingResult bindingResult,
-                             Model model) {
+                             Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             printErrorLog(bindingResult);
             model.addAttribute("reviewSaveDTO", reviewSaveDTO);
@@ -98,6 +98,7 @@ public class ReviewController {
         }
         reviewService.saveReview(1L, reviewSaveDTO);
         log.info("리뷰 작성 완료");
+        redirectAttributes.addFlashAttribute("alertMessage", "작성 완료되었습니다.");
         return "redirect:/reviews";
     }
 
