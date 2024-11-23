@@ -112,7 +112,7 @@
 
                     <td>
                         <span th:if="${review.isActive}" th:text="${'게시'}" class="badge bg-light-primary text-dark-primary fs-6"></span>
-                        <span th:if="${!review.isActive}" th:text="${'숨김'}" class="badge bg-light-danger text-dark-danger fs-6"></span>
+                        <span th:unless="${review.isActive}" th:text="${'숨김'}" class="badge bg-light-danger text-dark-danger fs-6"></span>
                     </td>
                   </tr>
                 </tbody>
