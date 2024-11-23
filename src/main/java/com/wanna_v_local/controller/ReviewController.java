@@ -168,7 +168,8 @@ public class ReviewController {
 
     @PostMapping("admin-reviews/{id}/update-false")
     public String updateReviewFalse(@PathVariable Long id, Model model,
-                                    @ModelAttribute @Validated ReviewUpdateStatusDTO reviewUpdateStatusDTO, BindingResult bindingResult) {
+                                    @ModelAttribute @Validated ReviewUpdateStatusDTO reviewUpdateStatusDTO, BindingResult bindingResult,
+                                    RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("review", reviewService.findReview(id));
             printErrorLog(bindingResult);
@@ -176,14 +177,18 @@ public class ReviewController {
         }
         reviewService.updateReviewActiveFalse(id, reviewUpdateStatusDTO.getNote());
         log.info("{}반 리뷰 숨김 완료", id);
-        return "redirect:/admin-reviews";
+        redirectAttributes.addAttribute("id", id);
+        redirectAttributes.addFlashAttribute("alertMessage", "숨김 처리 되었습니다.");
+        return "redirect:/admin-reviews/{id}";
     }
 
     @PostMapping("admin-reviews/{id}/update-true")
-    public String updateReviewTrue(@PathVariable Long id) {
+    public String updateReviewTrue(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         reviewService.updateReviewActiveTrue(id);
         log.info("{}번 리뷰 게시 완료", id);
-        return "redirect:/admin-reviews";
+        redirectAttributes.addAttribute("id", id);
+        redirectAttributes.addFlashAttribute("alertMessage", "게시 처리 되었습니다.");
+        return "redirect:/admin-reviews/{id}";
     }
 
     @GetMapping("reviews/tags")
