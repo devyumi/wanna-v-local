@@ -29,7 +29,6 @@ public class OCRService {
 
     private final RestaurantRepository restaurantRepository;
 
-
     @Value("${naver.ocr.invoke_url}")
     private String url;
 
@@ -83,23 +82,42 @@ public class OCRService {
     /**
      * 영수증 정보에서 가져온 식당명을 기반으로 하여 DB에 저장된 식당 조회
      *
-     * @param name
+     * @param storeInfo
      * @return
      */
-    public Restaurant findCorrectRestaurant(String name, String subName) {
+    public Restaurant findCorrectRestaurant(OCRResponseDTO.StoreInfo storeInfo) {
+
+        String name = storeInfo.getName().getText();
 
         //지점명 없을 경우 기본 상호명으로 식당 검색
-        if (subName == null) {
+        if (storeInfo.getSubName() == null) {
             return restaurantRepository.findByNameContaining(name);
         } else {
 
             Pattern pattern = Pattern.compile("\\((.*?)\\)");
-            Matcher matcher = pattern.matcher(subName);
+            Matcher matcher = pattern.matcher(storeInfo.getSubName().getText());
 
             if (matcher.find()) {
-                subName = matcher.group(1);
+                return restaurantRepository.findByNameContainingAndNameContaining(name, matcher.group(1));
+            } else {
+                return restaurantRepository.findByNameContainingAndNameContaining(name, storeInfo.getSubName().getText());
             }
-            return restaurantRepository.findByNameContainingAndNameContaining(name, subName);
+
         }
+    }
+
+    /**
+     * 영수증 정보에서 가져온 방문일자 타입 변환
+     *
+     * @param visitDate
+     * @return
+     */
+    public LocalDate findCorrectVisitDate(String visitDate) {
+        Pattern pattern = Pattern.compile("^(\\d{2,4})[-./](\\d{1,2})[-./](\\d{1,2})$");
+        Matcher matcher = pattern.matcher(visitDate);
+        if (matcher.find()) {
+            return LocalDate.of(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
+        }
+        return null;
     }
 }
