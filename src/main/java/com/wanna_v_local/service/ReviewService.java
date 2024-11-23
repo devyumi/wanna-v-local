@@ -58,6 +58,7 @@ public class ReviewService {
                 .content(badWordService.changeBadWord(reviewSaveDTO.getContent()))
                 .image(imgUrl.equals("") ? null : imgUrl)
                 .visitDate(reviewSaveDTO.getVisitDate())
+                .isActive(true)
                 .createdAt(LocalDateTime.now())
                 .build());
 
@@ -109,6 +110,7 @@ public class ReviewService {
                 .content(badWordService.changeBadWord(reviewUpdateDTO.getContent()))
                 .image(imgUrl.equals("") ? null : imgUrl)
                 .visitDate(originalReview.getVisitDate())
+                .isActive(originalReview.getIsActive())
                 .createdAt(LocalDateTime.now())
                 .build());
 
