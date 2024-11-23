@@ -57,6 +57,9 @@ public class OCRResponseDTO {
         @JsonProperty("name")
         private Name name;
 
+        @JsonProperty("bizNum")
+        private BizNum bizNum;
+
         @JsonProperty("subName")
         private SubName subName;
 
@@ -65,6 +68,14 @@ public class OCRResponseDTO {
     @JsonIgnoreProperties(ignoreUnknown = true)
     @Getter
     public static class Name {
+
+        @JsonProperty("text")
+        private String text;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    public static class BizNum {
 
         @JsonProperty("text")
         private String text;
@@ -89,21 +100,7 @@ public class OCRResponseDTO {
     @Getter
     public static class Date {
 
-        @JsonProperty("formatted")
-        private Formatted formatted;
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    @Getter
-    public static class Formatted {
-
-        @JsonProperty("year")
-        private String year;
-
-        @JsonProperty("month")
-        private String month;
-
-        @JsonProperty("day")
-        private String day;
+        @JsonProperty("text")
+        private String text;
     }
 }
