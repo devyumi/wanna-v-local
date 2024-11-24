@@ -7,6 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Review Tag Page</title>
+
+    <style>
+        .errorMessage{
+            margin-left: 1px;
+            margin-bottom: 1px;
+            color: #ff4238;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body id="body">
 <main layout:fragment="main-content" th:class="main-container" style="margin-top: 5%; margin-left: 17.5rem">
@@ -67,9 +76,38 @@
                                           <span th:text="${tag.name}" class="text-truncate" style="display: inline-block; width: 30rem;"></span>
                                       </td>
                                       <td>
-                                          <button type="button" class="btn btn-outline-secondary me-3" style="border-radius: 5%;">수정</button>
+                                          <button type="button" class="btn btn-outline-secondary me-3" style="border-radius: 5%;"
+                                                  data-bs-toggle="modal" th:data-bs-target="'#updateModal' + ${tag.id}">수정</button>
                                           <button type="button" class="btn btn-outline-danger" style="border-radius: 5%;"
                                                   data-bs-toggle="modal" th:data-bs-target="'#deleteModal' + ${tag.id}">삭제</button>
+
+                                          <!--태그 수정 모달창-->
+                                          <div class="modal fade" th:id="'updateModal' + ${tag.id}" aria-labelledby="updateModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h6 class="modal-title">태그 수정</h6>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                      </div>
+
+                                                      <form th:method="post" th:action="@{/reviews/tags/{id}/update(id=${tag.id})}" th:object="${tagUpdateDTO}">
+                                                          <input type="hidden" th:name="id" th:value="${tag.id}">
+                                                          <div class="modal-body modal-dialog-scrollable d-flex align-items-center">
+                                                              <div class="mb-3 text-start">
+                                                                  <label for="updateCategory" class="col-form-label text-start fw-bold">카테고리</label>
+                                                                  <input type="text" class="form-control text-start text-start" id="updateCategory" th:category="category" th:value="${tag.category}" readonly>
+                                                                  <label for="updateTagName" class="col-form-label text-start fw-bold">태그명</label>
+                                                                  <input type="text" class="form-control text-start" id="updateTagName" th:field="${tagUpdateDTO.name}">
+                                                              </div>
+                                                          </div>
+
+                                                          <div class="modal-footer border-0">
+                                                              <button type="submit" class="btn btn-primary" style="margin-left: auto; background-color: #5AAB6F; color: white;">수정</button>
+                                                          </div>
+                                                      </form>
+                                                  </div>
+                                              </div>
+                                          </div>
 
                                           <!--태그 삭제 모달창-->
                                           <div class="modal fade" th:id="'deleteModal' + ${tag.id}" aria-labelledby="deleteModalLabel" aria-hidden="true">
