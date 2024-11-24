@@ -71,7 +71,7 @@
                               </thead>
                               <tbody>
                                   <tr th:each="tag, stat: ${tags.tags}">
-                                      <td th:text="${tag.id}"></td>
+                                      <td th:text="${stat.count}"></td>
                                       <td>
                                           <span th:text="${tag.name}" class="text-truncate" style="display: inline-block; width: 30rem;"></span>
                                       </td>
@@ -141,33 +141,28 @@
                       <div class="modal-dialog">
                           <div class="modal-content">
                               <div class="modal-header">
-                                  <h6 class="modal-title">태그를 추가하세요.</h6>
+                                  <h6 class="modal-title">태그 추가</h6>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
 
-                              <div class="modal-body modal-dialog-scrollable d-flex align-items-center">
-                                  <form>
-                                      <div class="me-auto">
-                                          <label for="category" class="col-form-label">카테고리</label>
-                                          <select class="form-select" id="category">
-                                              <option selected>맛/가격</option>
-                                              <option>분위기</option>
-                                              <option>서비스/기타</option>
-                                              <option>이용 형태</option>
-                                          </select>
-                                      </div>
+                              <form th:method="post" th:action="@{/reviews/tags/write}" th:object="${tagSaveDTO}">
+                                  <div class="modal-body modal-dialog-scrollable align-items-center">
+                                      <label for="category" class="col-form-label fw-bold">카테고리</label>
+                                      <select class="form-select" id="category" th:field="*{category}">
+                                          <option value="맛/가격">맛/가격</option>
+                                          <option value="분위기">분위기</option>
+                                          <option value="서비스/기타">서비스/기타</option>
+                                          <option value="이용형태">이용형태</option>
+                                      </select>
 
-                                      <div class="mb-3">
-                                          <label for="tagName" class="col-form-label">태그명</label>
-                                          <input type="text" class="form-control" id="tagName">
-                                      </div>
-                                  </form>
-                              </div>
+                                      <label for="tagName" class="col-form-label fw-bold">태그명</label>
+                                      <input type="text" class="form-control" id="tagName" th:field="*{name}">
+                                  </div>
 
-                              <div class="modal-footer border-0">
-                                  <button type="button" class="btn me-2 mb-2" style="margin-left: auto; background-color: #5AAB6F; color: white;"
-                                          data-bs-toggle="modal" data-bs-target="#addNewModal">추가 완료</button>
-                              </div>
+                                  <div class="modal-footer border-0">
+                                      <button type="submit" class="btn btn-primary" style="margin-left: auto; background-color: #5AAB6F; color: white;">추가</button>
+                                  </div>
+                              </form>
                           </div>
                       </div>
                   </div>
