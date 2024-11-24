@@ -1,6 +1,6 @@
 package com.wanna_v_local.dto.response;
 
-import com.wanna_v_local.domain.ReviewTag;
+import com.wanna_v_local.domain.Tag;
 import com.wanna_v_local.dto.request.TagRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,13 +15,11 @@ import java.util.List;
 public class TagResponseDTO {
 
     private String type;
-    private List<ReviewTag> tags;
-    private List<Integer> count;
+    private List<Tag> tags;
 
     @Builder
-    public TagResponseDTO(TagRequestDTO tagRequestDTO, List<ReviewTag> tags, List<Integer> count) {
+    public TagResponseDTO(TagRequestDTO tagRequestDTO, List<Tag> tags) {
         this.type = tagRequestDTO.getType();
         this.tags = tags;
-        this.count = count;
     }
 }
