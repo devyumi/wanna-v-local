@@ -191,12 +191,6 @@ public class ReviewController {
         return "redirect:/admin-reviews/{id}";
     }
 
-    @GetMapping("reviews/tags")
-    public String getReviewTags(TagRequestDTO tagRequestDTO, Model model) {
-        model.addAttribute("tags", tagService.findTags(tagRequestDTO));
-        return "admin/admin-tag";
-    }
-
     private static void printErrorLog(BindingResult result) {
         log.info("{}", "*".repeat(20));
         for (FieldError fieldError : result.getFieldErrors()) {
