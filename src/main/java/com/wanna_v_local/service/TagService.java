@@ -67,7 +67,7 @@ public class TagService {
     }
 
     /**
-     * 태그 업데이트
+     * 태그 수정
      * @param tagId
      * @param tagSaveDTO
      */
@@ -76,7 +76,7 @@ public class TagService {
         Tag tag = findTag(tagId);
         tagRepository.save(Tag.builder()
                 .id(tagId)
-                .category(tagSaveDTO.getCategory())
+                .category(tag.getCategory())
                 .name(tagSaveDTO.getName())
                 .build());
     }
