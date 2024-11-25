@@ -10,4 +10,6 @@ import java.util.List;
 public interface TagCustomRepository {
 
     List<Tag> findAll(TagRequestDTO tagRequestDTO);
+
+    List<Integer> count(TagRequestDTO tagRequestDTO);
 }

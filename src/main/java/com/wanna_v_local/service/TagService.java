@@ -1,8 +1,8 @@
 package com.wanna_v_local.service;
 
 import com.wanna_v_local.domain.Tag;
-import com.wanna_v_local.dto.request.TagSaveDTO;
 import com.wanna_v_local.dto.request.TagRequestDTO;
+import com.wanna_v_local.dto.request.TagSaveDTO;
 import com.wanna_v_local.dto.response.TagResponseDTO;
 import com.wanna_v_local.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +30,13 @@ public class TagService {
         return TagResponseDTO.builder()
                 .tagRequestDTO(tagRequestDTO)
                 .tags(tagRepository.findAll(tagRequestDTO))
+                .count(tagRepository.count(tagRequestDTO))
                 .build();
     }
 
     /**
      * 태그 전체 조회 - 리뷰 작성 시 사용
+     *
      * @return
      */
     @Transactional(readOnly = true)
@@ -68,6 +70,7 @@ public class TagService {
 
     /**
      * 태그 수정
+     *
      * @param tagId
      * @param tagSaveDTO
      */

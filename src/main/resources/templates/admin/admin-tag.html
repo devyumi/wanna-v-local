@@ -66,6 +66,7 @@
                               <tr>
                                   <th>번호</th>
                                   <th>태그명</th>
+                                  <th>사용 중 (개)</th>
                                   <th style="width: 0.5%;">수정/삭제</th>
                               </tr>
                               </thead>
@@ -75,6 +76,7 @@
                                       <td>
                                           <span th:text="${tag.name}" class="text-truncate" style="display: inline-block; width: 30rem;"></span>
                                       </td>
+                                      <td th:text="${tags.count.get(stat.index)}"></td>
                                       <td>
                                           <button type="button" class="btn btn-outline-secondary me-3" style="border-radius: 5%;"
                                                   data-bs-toggle="modal" th:data-bs-target="'#updateModal' + ${tag.id}">수정</button>

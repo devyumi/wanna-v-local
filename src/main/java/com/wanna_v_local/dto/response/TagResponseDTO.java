@@ -16,10 +16,12 @@ public class TagResponseDTO {
 
     private String type;
     private List<Tag> tags;
+    private List<Integer> count;
 
     @Builder
-    public TagResponseDTO(TagRequestDTO tagRequestDTO, List<Tag> tags) {
+    public TagResponseDTO(TagRequestDTO tagRequestDTO, List<Tag> tags, List<Integer> count) {
         this.type = tagRequestDTO.getType();
         this.tags = tags;
+        this.count = count;
     }
 }
