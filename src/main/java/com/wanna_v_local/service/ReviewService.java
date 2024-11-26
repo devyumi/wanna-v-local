@@ -224,6 +224,7 @@ public class ReviewService {
      *
      * @param reviewId
      */
+    @Transactional
     public void updateReviewActiveTrue(Long reviewId) {
         Review review = findReview(reviewId);
         reviewRepository.save(
