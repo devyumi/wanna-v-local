@@ -1,19 +1,17 @@
 package com.wanna_v_local.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "pointlog")
+@Table(name = "PointLog")
 public class PointLog {
 
     @Id
@@ -24,10 +22,13 @@ public class PointLog {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "old_point")
     private Integer oldPoint;
 
+    @Column(name = "new_point")
     private Integer newPoint;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }
