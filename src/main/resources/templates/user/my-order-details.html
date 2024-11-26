@@ -100,7 +100,7 @@
               <tr>
                   <td class="fw-bold">쿠폰 할인 금액</td>
                   <td class="fw-bold text-end"
-                      th:text="${myOrders.fixedDiscount == 0 ? '-' + #numbers.formatInteger(myOrders.percentageDiscount * 0.01 * myOrders.actualPrice, 0, 'COMMA') + '원' : '-' + #numbers.formatInteger(myOrders.fixedDiscount, 0, 'COMMA') + '원'}"></td>
+                      th:text="${myOrders.finalDiscountAmount == 0 ? '-' + #numbers.formatInteger(myOrders.getFinalDiscountRate() * 0.01 * myOrders.actualPrice, 0, 'COMMA') + '원' : '-' + #numbers.formatInteger(myOrders.finalDiscountAmount, 0, 'COMMA') + '원'}"></td>
               </tr>
 
               <tr>
