@@ -46,6 +46,8 @@
                         <h6 class="fw-normal text-secondary mt-2"
                             th:text="${reservation.reservationDate.year + '년 ' + reservation.reservationDate.monthValue + '월 ' + reservation.reservationDate.dayOfMonth + '일'} + ' ' + ${reservation.reservationTime} + ', ' + ${reservation.guest} + '명'"></h6>
                         <h6 class="fw-bold mt-3" th:text="${#numbers.formatInteger(reservation.guest * 10000, 0, 'COMMA')} + '원'"></h6>
+                        <h6 th:if="${reservation.status == true}" class="fw-bold text-success me-2 mt-3" th:text="'예약 완료'"></h6>
+                        <h6 th:if="${reservation.status == false}" class="fw-bold text-danger me-2 mt-3" th:text="'예약 취소'"></h6>
                     </div>
                 </div>
             </div>
@@ -74,6 +76,12 @@
                     console.error('Error: ', error);
                 });
             }
+        }
+    </script>
+    <script th:inline="javascript">
+        const alertMessage = [[${alertMessage}]];
+        if (alertMessage) {
+            alert(alertMessage);
         }
     </script>
 </main>
