@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,6 +63,18 @@ public class MyPageController {
         }
         model.addAttribute("myReservation", myPageService.findMyReservation(id));
         return "user/my-reservation-details";
+    }
+
+    @PostMapping("reservations/{id}/cancel")
+    public String cancelMyReservation(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        myPageService.updateMyReservationStatus(id);
+
+        try {
+            redirectAttributes.addFlashAttribute("alertMessage", "예약이 취소 되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addAttribute("alertMessage", "예약 취소가 불가합니다.");
+        }
+        return "redirect:/reservations";
     }
 
     @GetMapping("likes")

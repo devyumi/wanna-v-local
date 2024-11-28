@@ -1,8 +1,11 @@
 package com.wanna_v_local.service;
 
+import com.wanna_v_local.common.PaymentCancelReason;
+import com.wanna_v_local.common.Status;
 import com.wanna_v_local.domain.*;
 import com.wanna_v_local.dto.request.MyPageUpdateDTO;
 import com.wanna_v_local.dto.request.MyReservationRequestDTO;
+import com.wanna_v_local.dto.request.PaymentRefundDTO;
 import com.wanna_v_local.dto.response.MyLikesResponseDTO;
 import com.wanna_v_local.dto.response.MyPageResponseDTO;
 import com.wanna_v_local.repository.*;
@@ -12,14 +15,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class MyPageService {
 
+    private final PaymentService paymentService;
     private final UserRepository userRepository;
     private final MyPageDTORepository myPageDTORepository;
     private final MyLikesDTORepository myLikesDTORepository;
@@ -111,6 +116,91 @@ public class MyPageService {
     @Transactional(readOnly = true)
     public Reservation findMyReservation(Long reservationId) {
         return reservationRepository.findById(reservationId).get();
+    }
+
+
+    /**
+     * 예약 취소: 결제 취소 -> 예약 취소 (Payment, Reservation Update)
+     *
+     * @param reservationId
+     * @return
+     */
+    @Transactional
+    public void updateMyReservationStatus(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).get();
+        Payment payment = reservation.getPayment();
+        Double cancelAmount = calculateCancelAmount(reservation);
+
+        PaymentRefundDTO paymentRefundDTO = PaymentRefundDTO.builder()
+                .paymentKey(payment.getPaymentKey())
+                .cancelReason(PaymentCancelReason.RESERVATION_CANCEL)
+                .cancelAmount(cancelAmount)
+                .build();
+
+        PaymentRefundDTO result = paymentService.requestPaymentCancel(paymentRefundDTO);
+
+        //결제 취소 성공 시 Update
+        String canceledAt = result.getCancels().get(0).getCanceledAt();
+        LocalDateTime canceledAtToLocalDateTime = OffsetDateTime.parse(canceledAt).toLocalDateTime();
+
+        //Payment Update
+        paymentRepository.save(Payment.builder()
+                .id(payment.getId())
+                .user(payment.getUser())
+                .paymentKey(payment.getPaymentKey())
+                .orderId(payment.getOrderId())
+                .actualPrice(payment.getActualPrice())
+                .finalPrice(payment.getFinalPrice())
+                .pointsUsed(payment.getPointsUsed())
+                .finalDiscountRate(payment.getFinalDiscountRate())
+                .finalDiscountAmount(payment.getFinalDiscountAmount())
+                .couponCode(payment.getCouponCode())
+                .status(Status.CANCELED)
+                .address(payment.getAddress())
+                .note(payment.getNote())
+                .cancelReason(PaymentCancelReason.RESERVATION_CANCEL.toString())
+                .cancelAmount(cancelAmount)
+                .createdAt(payment.getCreatedAt())
+                .approvedAt(payment.getApprovedAt())
+                .canceledAt(canceledAtToLocalDateTime)
+                .build());
+
+        //Reservation Update
+        reservationRepository.save(Reservation.builder()
+                .id(reservationId)
+                .user(reservation.getUser())
+                .restaurant(reservation.getRestaurant())
+                .payment(payment)
+                .guest(reservation.getGuest())
+                .reservationDate(reservation.getReservationDate())
+                .reservationTime(reservation.getReservationTime())
+                .createdAt(reservation.getCreatedAt())
+                .updatedAt(LocalDateTime.now())
+                .status(false)
+                .build());
+    }
+
+    /**
+     * 위약금 계산
+     *
+     * @param reservation
+     * @return
+     */
+    private Double calculateCancelAmount(Reservation reservation) {
+        double deposit = 10000 * reservation.getGuest();
+        LocalDate reservationDate = reservation.getReservationDate();
+        //예약 2일 전: 100% 환불
+        if (LocalDate.now().minusDays(2).isEqual(reservationDate) || LocalDate.now().minusDays(2).isAfter(reservationDate)) {
+            return deposit;
+
+            //예약 1일 전: 50% 환불
+        } else if (LocalDate.now().minusDays(1).isEqual(reservationDate) || LocalDate.now().minusDays(1).isAfter(reservationDate)) {
+            return deposit * 0.5;
+
+            //예약 30분 전 or 노쇼: 환불 0%
+        } else {
+            return 0.0;
+        }
     }
 
     /**
