@@ -11,7 +11,7 @@
 <body>
 <main layout:fragment="main-content" th:class="main-container">
   <section class="mt-2">
-  <div class="container-fluid border bg-white mb-2" th:each="order : ${myOrders}">
+  <div class="container-fluid border bg-white mb-2" th:each="order : ${myOrders}" th:if="${order.orderId != null}">
       <form th:method="post" th:action="@{/orders/{id}(id=${order.id})}">
           <input type="hidden" th:name="id" th:value="${order.id}">
           <div class="d-flex justify-content-between">
