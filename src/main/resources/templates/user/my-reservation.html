@@ -38,7 +38,7 @@
                         </div>
                     </form>
                     <a th:href="@{/restaurants/{id}(id=${reservation.restaurant.id})}">
-                        <img style="width: 100%; height: 200px; object-fit: cover;" th:src="${reservation.restaurant.image}" alt="">
+                        <img style="width: 100%; height: 200px; object-fit: cover;" th:src="${#strings.setSplit(reservation.restaurant.image, ',')[0]}" alt="">
                     </a>
 
                     <div class="ms-2 mt-3 mb-3">
