@@ -33,6 +33,7 @@ public class MyPageDTORepository {
                         .and(userGradeLog.createdAt.eq(
                                 JPAExpressions.select(userGradeLog.createdAt.max())
                                         .from(userGradeLog)
-                                        .where(userGradeLog.user.id.eq(user.id))))).fetchFirst();
+                                        .where(userGradeLog.user.id.eq(user.id)))))
+                .groupBy(user.username, user.profile, user.point, userGradeLog.grade).fetchFirst();
     }
 }
